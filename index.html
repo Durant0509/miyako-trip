@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>宮古島 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+  :root{
+    --bg:#eef5f6;
+    --surface:#ffffff;
+    --surface-2:#e2eef0;
+    --ink:#0e2a33;
+    --ink-dim:#55707a;
+    --ocean:#0a6e8c;
+    --ocean-bright:#12b6d6;
+    --sunset:#ff7a4d;
+    --line: rgba(14,42,51,0.14);
+    --shadow: rgba(14,42,51,0.12);
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#071b21;
+      --surface:#0e2830;
+      --surface-2:#123039;
+      --ink:#eaf4f5;
+      --ink-dim:#9fb7bd;
+      --ocean:#3fc2e0;
+      --ocean-bright:#7fe3f5;
+      --sunset:#ff9a70;
+      --line: rgba(255,255,255,0.14);
+      --shadow: rgba(0,0,0,0.45);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#071b21;
+    --surface:#0e2830;
+    --surface-2:#123039;
+    --ink:#eaf4f5;
+    --ink-dim:#9fb7bd;
+    --ocean:#3fc2e0;
+    --ocean-bright:#7fe3f5;
+    --sunset:#ff9a70;
+    --line: rgba(255,255,255,0.14);
+    --shadow: rgba(0,0,0,0.45);
+    color-scheme: dark;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{ margin:0; padding:0; }
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{ max-width:100%; }
+  h1,h2,h3{
+    font-family:'Bricolage Grotesque','Inter',sans-serif;
+    text-wrap:balance;
+    margin:0;
+  }
+  .mono{ font-family:'IBM Plex Mono',ui-monospace,monospace; font-variant-numeric:tabular-nums; }
+  a{ color:var(--ocean); }
+  .wrap{ max-width:640px; margin:0 auto; padding:0 18px 80px; }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    background:
+      radial-gradient(120% 140% at 20% -10%, color-mix(in srgb, var(--ocean-bright) 35%, transparent), transparent 60%),
+      linear-gradient(160deg, var(--ocean) 0%, #0a3f52 100%);
+    color:#eafbff;
+    padding:44px 18px 34px;
+    border-radius:0 0 28px 28px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::after{
+    content:"";
+    position:absolute; left:0; right:0; bottom:0; height:46%;
+    background:
+      repeating-linear-gradient(100deg, rgba(255,255,255,.05) 0 2px, transparent 2px 34px);
+    opacity:.6;
+    pointer-events:none;
+  }
+  .hero-inner{ max-width:640px; margin:0 auto; position:relative; }
+  .eyebrow{
+    font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+    color:#bdeef8; opacity:.85; font-weight:600;
+  }
+  .hero h1{ font-size:clamp(30px,8vw,40px); font-weight:800; margin-top:8px; letter-spacing:-0.01em; }
+  .hero .dates{ margin-top:6px; font-size:15px; color:#d6f2f7; }
+
+  .flightpath{
+    margin-top:26px; display:flex; align-items:center; gap:10px;
+    background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.18);
+    border-radius:16px; padding:14px 16px; backdrop-filter:blur(2px);
+  }
+  .fp-code{ font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:15px; }
+  .fp-sub{ font-size:11px; color:#bfe8ef; margin-top:2px; }
+  .fp-line{ flex:1; height:1px; background:repeating-linear-gradient(90deg, rgba(255,255,255,.55) 0 6px, transparent 6px 11px); position:relative; }
+  .fp-plane{ position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:13px; }
+  .flightpath-row + .flightpath-row{ margin-top:12px; }
+  .flightpath-row{ display:flex; align-items:center; gap:10px; }
+  .flightmeta{ display:flex; justify-content:space-between; margin-top:10px; font-size:11.5px; color:#bfe8ef; }
+
+  /* ---------- Section shell ---------- */
+  section{ margin-top:34px; }
+  .section-head{ display:flex; align-items:baseline; justify-content:space-between; margin-bottom:14px; }
+  .section-head h2{ font-size:21px; font-weight:700; }
+  .section-head .count{ font-size:12px; color:var(--ink-dim); font-family:'IBM Plex Mono',monospace; }
+
+  /* ---------- Hotel ticket cards ---------- */
+  .ticket{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:16px;
+    box-shadow:0 8px 20px -14px var(--shadow);
+    overflow:hidden;
+    margin-bottom:14px;
+  }
+  .ticket-top{ padding:16px 18px 14px; }
+  .ticket-top .tag{
+    display:inline-block; font-size:10.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--ocean); background:color-mix(in srgb, var(--ocean) 12%, transparent);
+    padding:3px 8px; border-radius:20px; margin-bottom:8px;
+  }
+  .ticket-top h3{ font-size:17px; font-weight:700; }
+  .ticket-top .addr{ font-size:13px; color:var(--ink-dim); margin-top:4px; }
+  .stub{
+    display:flex; border-top:1px dashed var(--line); position:relative;
+  }
+  .stub::before, .stub::after{
+    content:""; position:absolute; top:-9px; width:18px; height:18px; border-radius:50%; background:var(--bg);
+  }
+  .stub::before{ left:-9px; }
+  .stub::after{ right:-9px; }
+  .stub div{ flex:1; padding:12px 18px; }
+  .stub div + div{ border-left:1px dashed var(--line); }
+  .stub .lbl{ font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-dim); }
+  .stub .val{ font-family:'IBM Plex Mono',monospace; font-size:14px; font-weight:600; margin-top:2px; }
+
+  .maplink{
+    display:inline-flex; align-items:center; gap:5px; font-size:12.5px; font-weight:600;
+    color:var(--ocean); text-decoration:none; margin-top:10px;
+  }
+  .maplink svg{ width:13px; height:13px; }
+
+  /* ---------- Day cards ---------- */
+  .day{
+    background:var(--surface); border:1px solid var(--line); border-radius:18px;
+    padding:18px 18px 8px; margin-bottom:16px; box-shadow:0 8px 20px -14px var(--shadow);
+  }
+  .day-head{ display:flex; align-items:center; gap:12px; margin-bottom:14px; }
+  .day-num{
+    font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:26px;
+    color:var(--accent); min-width:34px;
+  }
+  .day-date{ font-size:12.5px; color:var(--ink-dim); }
+  .day-title{ font-size:16px; font-weight:700; margin-top:1px; }
+
+  .timeline{ position:relative; padding-left:20px; }
+  .timeline::before{
+    content:""; position:absolute; left:5px; top:4px; bottom:4px; width:1.5px;
+    background:var(--line);
+  }
+  .stop{ position:relative; padding-bottom:18px; }
+  .stop:last-child{ padding-bottom:6px; }
+  .stop::before{
+    content:""; position:absolute; left:-20px; top:4px; width:9px; height:9px; border-radius:50%;
+    background:var(--accent); box-shadow:0 0 0 3px var(--surface);
+  }
+  .stop .time{ font-family:'IBM Plex Mono',monospace; font-size:12px; font-weight:600; color:var(--accent); }
+  .stop h4{ font-size:14.5px; font-weight:700; margin-top:3px; }
+  .stop p{ font-size:13px; color:var(--ink-dim); margin:4px 0 0; }
+
+  .rest-block{
+    background:var(--surface-2); border:1px dashed var(--line); border-radius:12px;
+    padding:14px 16px; margin:8px 0 18px; font-size:13px; color:var(--ink-dim);
+  }
+  .rest-block b{ color:var(--ink); }
+
+  /* ---------- Dive shop cards ---------- */
+  .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .pick{
+    background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:12px 14px;
+  }
+  .pick h4{ font-size:13.5px; font-weight:700; }
+  .pick p{ font-size:12px; color:var(--ink-dim); margin:4px 0 0; }
+  .pick .badge{
+    display:inline-block; font-size:10px; font-weight:700; color:var(--ocean);
+    background:color-mix(in srgb, var(--ocean) 12%, transparent); padding:2px 7px; border-radius:20px; margin-top:8px;
+  }
+
+  /* ---------- Food ---------- */
+  .food-area{ margin-bottom:14px; }
+  .food-area h4{ font-size:13px; font-weight:700; color:var(--ink-dim); text-transform:uppercase; letter-spacing:.05em; margin-bottom:8px; }
+  .food-item{
+    display:flex; justify-content:space-between; gap:10px; padding:10px 0; border-top:1px solid var(--line);
+  }
+  .food-item:first-child{ border-top:none; }
+  .food-item .name{ font-size:14px; font-weight:600; }
+  .food-item .note{ font-size:12.5px; color:var(--ink-dim); margin-top:2px; }
+
+  /* ---------- Callout ---------- */
+  .callout{
+    background: color-mix(in srgb, var(--sunset) 12%, var(--surface));
+    border:1px solid color-mix(in srgb, var(--sunset) 35%, var(--line));
+    border-radius:14px; padding:14px 16px; font-size:13px; margin-bottom:12px;
+  }
+  .callout b{ color:var(--sunset); }
+
+  /* ---------- Packing checklist ---------- */
+  .pack-grid{ display:grid; grid-template-columns:1fr 1fr; gap:8px 14px; }
+  .pack-item{
+    display:flex; align-items:center; gap:9px; padding:9px 10px; border:1px solid var(--line);
+    border-radius:10px; background:var(--surface); cursor:pointer; font-size:13px; user-select:none;
+  }
+  .pack-item input{ width:15px; height:15px; accent-color:var(--ocean); flex:none; }
+  .pack-item.checked{ opacity:.5; text-decoration:line-through; }
+  .pack-note{ grid-column:1 / -1; font-size:12px; color:var(--ink-dim); padding:4px 2px 0; }
+
+  footer{ margin-top:40px; text-align:center; font-size:11.5px; color:var(--ink-dim); }
+
+  @media (max-width:420px){
+    .grid2, .pack-grid{ grid-template-columns:1fr; }
+  }
+  @media (prefers-reduced-motion:no-preference){
+    .day, .ticket{ animation:rise .5s ease both; }
+  }
+  @keyframes rise{ from{ opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;} }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">Okinawa · Miyakojima</div>
+    <h1>宮古島 4 天 3 夜</h1>
+    <div class="dates">2026.09.20 (日) → 09.23 (三)</div>
+
+    <div class="flightpath">
+      <div style="width:100%">
+        <div class="flightpath-row">
+          <div>
+            <div class="fp-code">TPE</div>
+            <div class="fp-sub">台北</div>
+          </div>
+          <div class="fp-line"><span class="fp-plane">✈</span></div>
+          <div style="text-align:right">
+            <div class="fp-code">SHI</div>
+            <div class="fp-sub">下地島</div>
+          </div>
+        </div>
+        <div class="flightmeta">
+          <span>JX890 · 09/20 13:00 抵達</span>
+        </div>
+        <div class="flightpath-row" style="margin-top:14px">
+          <div>
+            <div class="fp-code">SHI</div>
+            <div class="fp-sub">下地島</div>
+          </div>
+          <div class="fp-line"><span class="fp-plane">✈</span></div>
+          <div style="text-align:right">
+            <div class="fp-code">TPE</div>
+            <div class="fp-sub">台北</div>
+          </div>
+        </div>
+        <div class="flightmeta">
+          <span>JX891 · 09/23 14:00 起飛</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="callout" style="margin-top:28px">
+    <b>注意</b> — 進出都走「みやこ下地島空港(SHI)」,在伊良部島上,跟「宮古空港(MMY)」是不同機場,兩地開車約 20–25 分鐘(經伊良部大橋)。租車導航跟還車地點都要認住 SHI。
+  </div>
+
+  <section>
+    <div class="section-head"><h2>住宿</h2><span class="count">2 間</span></div>
+
+    <div class="ticket">
+      <div class="ticket-top">
+        <span class="tag">Night 1–2</span>
+        <h3>宮古島 11 號公寓飯店</h3>
+        <div class="addr">Apartment Hotel 11 Miyakojima · 沖縄県宮古島市平良松原558-3</div>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=宮古島市平良松原558-3" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11a7 7 0 1 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          在 Google 地圖開啟
+        </a>
+      </div>
+      <div class="stub">
+        <div><div class="lbl">Check-in</div><div class="val">09/20 16:00</div></div>
+        <div><div class="lbl">Check-out</div><div class="val">09/22 10:00</div></div>
+      </div>
+    </div>
+
+    <div class="ticket">
+      <div class="ticket-top">
+        <span class="tag">Night 3</span>
+        <h3>Canopy by Hilton Okinawa Miyako Island Resort</h3>
+        <div class="addr">沖縄県宮古島市平良久貝550-7 · Turibaa 度假區,近伊良部大橋 / パイナガマビーチ</div>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=宮古島市平良久貝550-7 Canopy by Hilton" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11a7 7 0 1 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          在 Google 地圖開啟
+        </a>
+      </div>
+      <div class="stub">
+        <div><div class="lbl">Check-in</div><div class="val">09/22 15:00</div></div>
+        <div><div class="lbl">Check-out</div><div class="val">09/23 11:00</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== DAY 1 ===== -->
+  <section>
+    <div class="section-head"><h2>行程</h2><span class="count">4 days</span></div>
+
+    <div class="day" style="--accent:var(--ocean)">
+      <div class="day-head">
+        <div class="day-num">01</div>
+        <div>
+          <div class="day-date">09/20 (日)</div>
+          <div class="day-title">抵達・伊良部跨海兜風</div>
+        </div>
+      </div>
+      <div class="timeline">
+        <div class="stop">
+          <div class="time">13:00</div>
+          <h4>下地島空港降落,領行李、取租車</h4>
+          <p>下地島空港航廈頂樓有免費觀景台,等車時可以先上去拍一張。</p>
+        </div>
+        <div class="stop">
+          <div class="time">13:30</div>
+          <h4>17END</h4>
+          <p>機場旁順路的絕景海岸,離岸越遠海水藍色越深,10 分鐘打卡剛好。</p>
+          <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=17END 宮古島 下地島" target="_blank" rel="noopener">地圖</a>
+        </div>
+        <div class="stop">
+          <div class="time">14:00</div>
+          <h4>伊良部大橋跨海兜風</h4>
+          <p>全長 3,540m,日本最長免費跨海大橋,橋上就是宮古藍全景。</p>
+          <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=伊良部大橋" target="_blank" rel="noopener">地圖</a>
+        </div>
+        <div class="stop">
+          <div class="time">15:00</div>
+          <h4>Check-in 11 號公寓飯店</h4>
+          <p>放行李、稍作休息。</p>
+        </div>
+        <div class="stop">
+          <div class="time">17:00</div>
+          <h4>砂山ビーチ 散步・看日落</h4>
+          <p>市區車程約 10 分鐘,天然岩石拱門是招牌畫面,9 月日落約 18:20。</p>
+          <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=砂山ビーチ 宮古島" target="_blank" rel="noopener">地圖</a>
+        </div>
+        <div class="stop">
+          <div class="time">19:00</div>
+          <h4>晚餐・西里通り / 下里大通り</h4>
+          <p>宮古そば、居酒屋、海鮮都集中在這兩條街,飯店走路可到。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== DAY 2 ===== -->
+    <div class="day" style="--accent:var(--ocean-bright)">
+      <div class="day-head">
+        <div class="day-num">02</div>
+        <div>
+          <div class="day-date">09/21 (一)</div>
+          <div class="day-title">體驗潛水・南岸海灘</div>
+        </div>
+      </div>
+      <div class="timeline">
+        <div class="stop">
+          <div class="time">09:00</div>
+          <h4>半日體驗潛水(需自行預約)</h4>
+          <p>選少人數店家較安心,如 EARTH-LENS、サンアイランド宮古島、Step 海 Divers School。詳見下方「潛水」區塊。</p>
+        </div>
+        <div class="stop">
+          <div class="time">12:30</div>
+          <h4>簡單午餐</h4>
+          <p>潛店附近覓食,或直接前往前浜方向路上的食堂。</p>
+        </div>
+        <div class="stop">
+          <div class="time">14:00</div>
+          <h4>與那覇前浜海灘</h4>
+          <p>號稱「東洋第一美灘」,7km 純白沙加透明宮古藍,可遠眺來間大橋。</p>
+          <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=与那覇前浜ビーチ" target="_blank" rel="noopener">地圖</a>
+        </div>
+        <div class="stop">
+          <div class="time">15:30</div>
+          <h4>來間大橋 → 龍宮城展望台</h4>
+          <p>橋上是「來間藍」,展望台可從高處把前浜海灘全景一次看完。</p>
+          <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=竜宮城展望台 宮古島" target="_blank" rel="noopener">地圖</a>
+        </div>
+        <div class="stop">
+          <div class="time">18:00</div>
+          <h4>返回平良,晚餐</h4>
+          <p>今天曬了一整天,找間有冷氣的居酒屋坐下來吃。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== DAY 3 ===== -->
+    <div class="day" style="--accent:var(--sunset)">
+      <div class="day-head">
+        <div class="day-num">03</div>
+        <div>
+          <div class="day-date">09/22 (二)</div>
+          <div class="day-title">東平安名崎・轉往度假村</div>
+        </div>
+      </div>
+      <div class="timeline">
+        <div class="stop">
+          <div class="time">10:00</div>
+          <h4>退房・11 號公寓飯店</h4>
+          <p>行李先上車,今天走一圈東側再轉去 Canopy Hilton。</p>
+        </div>
+        <div class="stop">
+          <div class="time">10:40</div>
+          <h4>東平安名崎</h4>
+          <p>國家指定名勝,宮古島東南端細長岬角,走到底是白燈塔,360° 海景。市區開車約 35 分鐘。</p>
+          <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=東平安名崎" target="_blank" rel="noopener">地圖</a>
+        </div>
+        <div class="stop">
+          <div class="time">12:00</div>
+          <h4>雪鹽製鹽所</h4>
+          <p>順路,雪鹽霜淇淋 + 伴手禮一次買齊。</p>
+          <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=雪塩製塩所 宮古島" target="_blank" rel="noopener">地圖</a>
+        </div>
+        <div class="stop">
+          <div class="time">13:00</div>
+          <h4>午餐 + 公設市場伴手禮</h4>
+          <p>回程順路繞平良市區,公設市場買點心跟乾貨。</p>
+        </div>
+        <div class="stop">
+          <div class="time">15:00</div>
+          <h4>Check-in Canopy by Hilton</h4>
+          <p>頂樓無邊際泳池正對伊良部大橋,今晚開始不排行程。</p>
+        </div>
+      </div>
+      <div class="rest-block">🌴 <b>今晚起在飯店耍廢</b> — 頂樓泳池、房間、看日落,故意不排行程。</div>
+    </div>
+
+    <!-- ===== DAY 4 ===== -->
+    <div class="day" style="--accent:var(--ink-dim)">
+      <div class="day-head">
+        <div class="day-num">04</div>
+        <div>
+          <div class="day-date">09/23 (三)</div>
+          <div class="day-title">退房・還車・返程</div>
+        </div>
+      </div>
+      <div class="rest-block" style="margin-top:0">🛎️ <b>早上在度假村自由活動</b>,不排行程 — 睡到自然醒、吃早餐、再游一次泳池。</div>
+      <div class="timeline">
+        <div class="stop">
+          <div class="time">11:00</div>
+          <h4>退房・Canopy by Hilton</h4>
+        </div>
+        <div class="stop">
+          <div class="time">11:30</div>
+          <h4>還車</h4>
+          <p>從飯店到下地島空港約 25 分鐘,還車後留一點緩衝時間。</p>
+        </div>
+        <div class="stop">
+          <div class="time">12:00</div>
+          <h4>抵達下地島空港</h4>
+          <p>時間夠的話上頂樓觀景台再拍一張。</p>
+        </div>
+        <div class="stop">
+          <div class="time">14:00</div>
+          <h4>JX891 起飛,飛回台北</h4>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>潛水店家</h2><span class="count">自行預約</span></div>
+    <div class="grid2">
+      <div class="pick">
+        <h4>EARTH-LENS</h4>
+        <p>1–4 人小團,新手友善,教練帶得細。</p>
+        <span class="badge">少人數</span>
+      </div>
+      <div class="pick">
+        <h4>サンアイランド宮古島</h4>
+        <p>2002 年開業,家族經營,老牌穩定。</p>
+        <span class="badge">老牌</span>
+      </div>
+      <div class="pick">
+        <h4>Step 海 Divers School</h4>
+        <p>1 人也能報名,包場式體驗潛水。</p>
+        <span class="badge">彈性</span>
+      </div>
+      <div class="pick">
+        <h4>アクアティックアドベンチャー</h4>
+        <p>天天出船,新手到老手都收。</p>
+        <span class="badge">天天出船</span>
+      </div>
+    </div>
+    <div class="callout" style="margin-top:12px">
+      9 月仍是颱風尾,建議選<b>可免費改期</b>的方案,出發前一週再密切關注海況。
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>吃吃喝喝</h2></div>
+    <div class="food-area">
+      <h4>平良市區</h4>
+      <div class="food-item"><div><div class="name">宮古そば専門店</div><div class="note">西里通り沿線,觀光晚餐首選</div></div></div>
+      <div class="food-item"><div><div class="name">bistroちぃぽっぽ</div><div class="note">隱藏版法式午餐</div></div></div>
+      <div class="food-item"><div><div class="name">SHISA'S CAFE&BBQ</div><div class="note">豪邁 BBQ,吃到飽派</div></div></div>
+      <div class="food-item"><div><div class="name">公設市場周邊ジェラート</div><div class="note">2026 食べログ甜點百名店</div></div></div>
+    </div>
+    <div class="food-area">
+      <h4>東側・雪鹽周邊</h4>
+      <div class="food-item"><div><div class="name">雪鹽霜淇淋</div><div class="note">雪鹽製鹽所現場限定</div></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>行前清單</h2></div>
+    <div class="pack-grid" id="packGrid">
+      <label class="pack-item"><input type="checkbox" data-key="license"> 台灣駕照日文譯本(非國際駕照!)</label>
+      <label class="pack-item"><input type="checkbox" data-key="swim"> 泳衣 ×2(輪流曬乾)</label>
+      <label class="pack-item"><input type="checkbox" data-key="reef"> 珊瑚礁友善防曬乳</label>
+      <label class="pack-item"><input type="checkbox" data-key="shoes"> 水陸兩用鞋(礁石多)</label>
+      <label class="pack-item"><input type="checkbox" data-key="towel"> 快乾毛巾</label>
+      <label class="pack-item"><input type="checkbox" data-key="phonebag"> 防水手機袋</label>
+      <label class="pack-item"><input type="checkbox" data-key="hat"> 遮陽帽 / 墨鏡</label>
+      <label class="pack-item"><input type="checkbox" data-key="rain"> 薄雨衣(9 月午後雷陣雨)</label>
+      <label class="pack-item"><input type="checkbox" data-key="powerbank"> 行動電源</label>
+      <label class="pack-item"><input type="checkbox" data-key="meds"> 個人常備藥</label>
+      <div class="pack-note">駕照譯本可在台灣監理站或線上申請,建議出發前至少 2 週辦好。</div>
+    </div>
+  </section>
+
+  <footer>宮古島 2026.09.20 – 09.23 · 自駕行程</footer>
+</div>
+
+<script>
+(function(){
+  var KEY = 'miyako-packing-2026';
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch(e) { state = {}; }
+
+  document.querySelectorAll('#packGrid .pack-item').forEach(function(item){
+    var input = item.querySelector('input');
+    var key = input.getAttribute('data-key');
+    if (state[key]) { input.checked = true; item.classList.add('checked'); }
+    input.addEventListener('change', function(){
+      item.classList.toggle('checked', input.checked);
+      state[key] = input.checked;
+      try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e) {}
+    });
+  });
+})();
+</script>
+</body>
+</html>
