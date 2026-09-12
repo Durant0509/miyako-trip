@@ -206,6 +206,33 @@
   .food-item .name{ font-size:14px; font-weight:600; }
   .food-item .note{ font-size:12.5px; color:var(--ink-dim); margin-top:2px; }
 
+  /* ---------- Candidate list (未定案候選) ---------- */
+  .cand-intro{ font-size:13px; color:var(--ink-dim); margin-bottom:16px; }
+  .cand-group{ margin-bottom:24px; }
+  .cand-group h3{
+    font-size:12.5px; font-weight:700; color:var(--ocean); text-transform:uppercase;
+    letter-spacing:.06em; margin-bottom:10px; display:flex; align-items:center; gap:8px;
+  }
+  .cand-group h3::after{ content:""; flex:1; height:1px; background:var(--line); }
+  .cand{
+    background:var(--surface); border:1px solid var(--line); border-radius:14px;
+    padding:13px 15px; margin-bottom:10px;
+  }
+  .cand-head{ display:flex; align-items:flex-start; justify-content:space-between; gap:10px; }
+  .cand-head h4{ font-size:14.5px; font-weight:700; }
+  .cand-head .jp{ font-size:12px; font-weight:400; color:var(--ink-dim); margin-left:5px; }
+  .stars{ color:var(--ocean); font-size:11px; letter-spacing:1px; white-space:nowrap; padding-top:2px; }
+  .cand-desc{ font-size:13px; color:var(--ink-dim); margin-top:6px; }
+  .cand-meta{ display:flex; flex-wrap:wrap; gap:6px 14px; font-size:12px; color:var(--ink); margin-top:8px; font-weight:600; }
+  .cand-addr{ font-size:11.5px; color:var(--ink-dim); margin-top:6px; }
+  .cand.mini{ display:flex; align-items:center; justify-content:space-between; padding:11px 15px; }
+  .cand.mini h4{ font-size:14px; font-weight:600; }
+  .badge-wait{
+    display:inline-block; font-size:10px; font-weight:700; color:var(--sunset);
+    background:color-mix(in srgb, var(--sunset) 14%, transparent); padding:2px 8px; border-radius:20px;
+    white-space:nowrap;
+  }
+
   /* ---------- Callout ---------- */
   .callout{
     background: color-mix(in srgb, var(--sunset) 12%, var(--surface));
@@ -323,6 +350,7 @@
   <!-- ===== DAY 1 ===== -->
   <section>
     <div class="section-head"><h2>行程</h2><span class="count">4 days</span></div>
+    <div class="cand-intro" style="margin-top:-6px">Day 1–2 是草案,還沒完全定案,可以搭配下面的「候選清單」隨時調換;Day 3 晚上進 Canopy Hilton 之後就確定不排行程。</div>
 
     <div class="day" style="--accent:var(--ocean)">
       <div class="day-head">
@@ -513,17 +541,164 @@
   </section>
 
   <section>
-    <div class="section-head"><h2>吃吃喝喝</h2></div>
-    <div class="food-area">
-      <h4>平良市區</h4>
-      <div class="food-item"><div><div class="name">宮古そば専門店</div><div class="note">西里通り沿線,觀光晚餐首選</div></div></div>
-      <div class="food-item"><div><div class="name">bistroちぃぽっぽ</div><div class="note">隱藏版法式午餐</div></div></div>
-      <div class="food-item"><div><div class="name">SHISA'S CAFE&BBQ</div><div class="note">豪邁 BBQ,吃到飽派</div></div></div>
-      <div class="food-item"><div><div class="name">公設市場周邊ジェラート</div><div class="note">2026 食べログ甜點百名店</div></div></div>
+    <div class="section-head"><h2>候選清單</h2><span class="count">未定案</span></div>
+    <div class="cand-intro">行程還沒定,先把找到的口袋名單整理起來,到時候看天氣、心情、有沒有位子再彈性挑。</div>
+
+    <div class="cand-group">
+      <h3>正餐</h3>
+      <div class="cand mini"><h4>Blue Turtle 宮古島</h4>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=Blue Turtle 宮古島" target="_blank" rel="noopener">地圖</a>
+      </div>
+      <div class="cand mini"><h4>國仲商店</h4>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=国仲商店 宮古島" target="_blank" rel="noopener">地圖</a>
+      </div>
+      <div class="cand mini"><h4>宮古牛焼肉 玉城 <span class="badge-wait">候補中・目前沒位</span></h4>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=宮古牛焼肉 玉城 宮古島" target="_blank" rel="noopener">地圖</a>
+      </div>
+      <div class="cand mini"><h4>木炭烤肉 琉宮園 <span class="badge-wait">候補中・目前沒位</span></h4>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=琉宮園 宮古島" target="_blank" rel="noopener">地圖</a>
+      </div>
+      <div class="cand">
+        <div class="cand-head"><h4>Today's… <span class="jp">Shima Bistro TAJIYA</span></h4><span class="stars">★★★★★</span></div>
+        <p class="cand-desc">南邊人氣輕食餐廳,波希米亞海洋風裝潢。推薦鮪魚 POKE BOWL、宮古牛燒肉 TJY Bowl、TJY Curry、Maqui Berry Bowl。11:00 開店前就常客滿,建議提早 30 分。</p>
+        <div class="cand-meta"><span>💰 早餐880–1880円・午餐980–1380円</span><span>⏰ 8–10 / 11–15(二四休)</span></div>
+        <div class="cand-addr">Sunagawa-1168-2, Gusukube · 店前僅約 3 車位,建議搭車前往</div>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=Shima Bistro TAJIYA 宮古島" target="_blank" rel="noopener">地圖</a>
+      </div>
     </div>
-    <div class="food-area">
-      <h4>東側・雪鹽周邊</h4>
-      <div class="food-item"><div><div class="name">雪鹽霜淇淋</div><div class="note">雪鹽製鹽所現場限定</div></div></div>
+
+    <div class="cand-group">
+      <h3>冰品・果昔</h3>
+      <div class="cand">
+        <div class="cand-head"><h4>EIGHT smoothie's <span class="jp">エイトスムージー</span></h4><span class="stars">★★★★★</span></div>
+        <p class="cand-desc">全宮古島最好喝的新鮮水果冰沙,現點現做,açaí bowl 也推薦。白色貨櫃屋+粉紅裝潢很好拍。</p>
+        <div class="cand-meta"><span>💰 700–1500円</span><span>⏰ 11:00–17:00(週二休)</span></div>
+        <div class="cand-addr">Nishinakasone-460-5, Hirara · 店旁免費停車</div>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=エイトスムージー 宮古島" target="_blank" rel="noopener">地圖</a>
+      </div>
+      <div class="cand">
+        <div class="cand-head"><h4>Blue Seal <span class="jp">宮古島パイナガマ店</span></h4><span class="stars">★★★★☆</span></div>
+        <p class="cand-desc">沖繩最知名冰淇淋連鎖,推香檬雪酪、紅芋、琉球紅茶麻糬口味。冰淇淋主題裝潢很好拍。</p>
+        <div class="cand-meta"><span>💰 390–1000円</span><span>⏰ 10:00–20:00</span></div>
+        <div class="cand-addr">Kugai-654-23, Hirara · 店門口免費停車</div>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=ブルーシール 宮古島パイナガマ店" target="_blank" rel="noopener">地圖</a>
+      </div>
+      <div class="cand">
+        <div class="cand-head"><h4>RICCO gelato <span class="jp">リッコジェラート</span></h4><span class="stars">★★★☆☆</span></div>
+        <p class="cand-desc">當地食材義式 Gelato,雪鹽、芒果、草莓口味中規中矩,市區順路解暑用。</p>
+        <div class="cand-meta"><span>💰 600–960円</span><span>⏰ 週日一四五12–17:45,週六16–20:30(二三休)</span></div>
+        <div class="cand-addr">Shimozato-550, Hirara · 無專屬車位,附近投幣停車場步行1–3分</div>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=リッコジェラート 宮古島" target="_blank" rel="noopener">地圖</a>
+      </div>
+      <div class="cand">
+        <div class="cand-head"><h4>gelato Cafe Ninufa</h4><span class="stars">★★★★☆</span></div>
+        <p class="cand-desc">池間島隱藏景觀咖啡廳,旁邊就是可拍心形岩的 Ikizu Beach。百香果 gelato 清爽,窯烤披薩也好吃,店內沒冷氣。</p>
+        <div class="cand-meta"><span>💰 gelato 650–850円・披薩1600–2500円</span><span>⏰ 10:00–17:00(週三休)</span></div>
+        <div class="cand-addr">Maezato-976-1, Hirara · 店旁免費停車</div>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=gelato Cafe Ninufa 池間島" target="_blank" rel="noopener">地圖</a>
+      </div>
+    </div>
+
+    <div class="cand-group">
+      <h3>咖啡・烘焙</h3>
+      <div class="cand">
+        <div class="cand-head"><h4>Ningin Coffee <span class="jp">ニンギン珈琲</span></h4><span class="stars">★★★★☆</span></div>
+        <p class="cand-desc">在地咖啡職人推薦第一名,招牌熱黑糖拿鐵順口,巴斯克蛋糕也是人氣款,生意很好常常客滿。</p>
+        <div class="cand-meta"><span>💰 咖啡550–950円・蛋糕750円</span><span>⏰ 9:00–17:00</span></div>
+        <div class="cand-addr">Kugai-670-4 1F, Hirara · 門口約3個路邊車位</div>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=ニンギン珈琲 宮古島" target="_blank" rel="noopener">地圖</a>
+      </div>
+      <div class="cand">
+        <div class="cand-head"><h4>Moja's Bakery <span class="jp">モジャのパン屋</span></h4><span class="stars">★★★★☆</span></div>
+        <p class="cand-desc">市區人氣麵包店,近宮古神社,開店前就大排長龍,中午前常完售。建議 9:40 前到。巧克力、紅豆、黑糖包餡是人氣款,咖啡只能外帶。</p>
+        <div class="cand-meta"><span>💰 麵包250–380円(僅現金)</span><span>⏰ 二至五10–15,六10–12:30(日一休)</span></div>
+        <div class="cand-addr">Higashinakasone-20, Hirara · 專屬4車位(步行2分),或附近收費停車場</div>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=モジャのパン屋 宮古島" target="_blank" rel="noopener">地圖</a>
+      </div>
+      <div class="cand">
+        <div class="cand-head"><h4>cafeまほーてらす</h4><span class="stars">★★★★☆</span></div>
+        <p class="cand-desc">巷弄內隱藏咖啡廳,同時是間 Hostel(Mahho Terrace)。手工貝果保留麥香、口感彈牙,是招牌。</p>
+        <div class="cand-meta"><span>💰 貝果三明治900–1200円</span><span>⏰ 三至五8–15,六日8–13(二休)</span></div>
+        <div class="cand-addr">Nishizato-182-3, Hirara · 門口約3個車位</div>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=cafeまほーてらす 宮古島" target="_blank" rel="noopener">地圖</a>
+      </div>
+      <div class="cand">
+        <div class="cand-head"><h4>ensemble coffee miyakoisland</h4><span class="stars">★★★★☆</span></div>
+        <p class="cand-desc">少數現代風格咖啡廳,海洋元素裝潢好拍。手沖咖啡香氣足,巴西莓碗給料豐富。</p>
+        <div class="cand-meta"><span>💰 咖啡400–700円・莓果碗1400円</span><span>⏰ 10:00–18:00(二三休)</span></div>
+        <div class="cand-addr">Kugai-1068-9, Hirara · 路邊不便,旁邊永旺城購物中心可停車</div>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=ensemble coffee miyakoisland" target="_blank" rel="noopener">地圖</a>
+      </div>
+    </div>
+
+    <div class="cand-group">
+      <h3>甜點・伴手禮・在地小吃</h3>
+      <div class="cand">
+        <div class="cand-head"><h4>雪塩ミュージアム <span class="jp">雪鹽工廠</span></h4><span class="stars">★★★★★</span></div>
+        <p class="cand-desc">觀光客必訪,世界最細鹽做的冰淇淋,鹹香奶香很特別。可參觀製程、試吃各種調味料,伴手禮一次買齊。</p>
+        <div class="cand-meta"><span>💰 冰淇淋400–600円(冰淇淋機需現金)</span><span>⏰ 9:00–18:00</span></div>
+        <div class="cand-addr">Karimata-191, Hirara(北端) · 免費停車</div>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=雪塩ミュージアム 宮古島" target="_blank" rel="noopener">地圖</a>
+      </div>
+      <div class="cand">
+        <div class="cand-head"><h4>宮古きび茶屋 <span class="jp">さとうきび甘味処</span></h4><span class="stars">★★★★★</span></div>
+        <p class="cand-desc">可以自己選甘蔗現榨甘蔗汁,還有黑糖黃豆粉刨冰、白玉糰子。鐵皮屋藏在甘蔗田小路裡,生意很好。跟雪鹽工廠很近,可安排同一天。</p>
+        <div class="cand-meta"><span>💰 飲品500–1100円・甜品550–1000円</span><span>⏰ 10:00–15:45</span></div>
+        <div class="cand-addr">Karimata-129, Hirara · 免費停車</div>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=宮古きび茶屋 宮古島" target="_blank" rel="noopener">地圖</a>
+      </div>
+      <div class="cand">
+        <div class="cand-head"><h4>ぐるぐるめんや</h4><span class="stars">★★★★☆</span></div>
+        <p class="cand-desc">傳統日式刨冰(野葡萄、紅芋),份量大適合分享。店裡賣的「宮古うずまきそば」漩渦麵無添加、耐煮,很值得買回家。</p>
+        <div class="cand-meta"><span>💰 刨冰1300–1600円(僅現金)</span><span>⏰ 11:30–17:30(二三四休)</span></div>
+        <div class="cand-addr">Tomori-306-5, Gusukube · 免費停車</div>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=ぐるぐるめんや 宮古島" target="_blank" rel="noopener">地圖</a>
+      </div>
+      <div class="cand">
+        <div class="cand-head"><h4>Aragusuku Honeybee Garden <span class="jp">あらぐすくミツバチガーデン</span></h4><span class="stars">★★★★☆</span></div>
+        <p class="cand-desc">自家養蜂蜂蜜專門店,招牌蜂蜜堅果冰淇淋濃郁不膩。店內真的有蜜蜂在飛,小孩會覺得新奇。收得早,要抓緊時間去。</p>
+        <div class="cand-meta"><span>💰 冰淇淋700–850円</span><span>⏰ 11:30–15:00(一二休)</span></div>
+        <div class="cand-addr">Aragusuku-798-1, Gusukube · 門口免費停車</div>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=あらぐすくミツバチガーデン" target="_blank" rel="noopener">地圖</a>
+      </div>
+      <div class="cand">
+        <div class="cand-head"><h4>Nakayukui Shoten <span class="jp">なかゆくい商店</span></h4><span class="stars">★★★★★</span></div>
+        <p class="cand-desc">伊良部島排隊名店,炸紅芋球外酥內Q不甜膩,配冰淇淋剛好。常賣完就關店,建議早點或提早到下午開店前排隊。停車場在店後方,入口不對著店面,第一次去容易錯過。</p>
+        <div class="cand-meta"><span>💰 120円/顆,加冰淇淋450円(僅現金)</span><span>⏰ 9:30–12 / 13:30–14(一四休,賣完打烊)</span></div>
+        <div class="cand-addr">Kuninaka-57-3, Irabu</div>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=なかゆくい商店 伊良部島" target="_blank" rel="noopener">地圖</a>
+      </div>
+      <div class="cand">
+        <div class="cand-head"><h4>さとうきびの店ぶーずやー</h4><span class="stars">★★★★☆</span></div>
+        <p class="cand-desc">伊良部島隱藏黑糖專賣店,開在糖廠旁。招牌黑糖珍珠拿鐵無咖啡因,偏甜可請老闆少加糖。吸管都是甘蔗做的。</p>
+        <div class="cand-meta"><span>💰 飲品400–1000円(僅現金)</span><span>⏰ 12:00–18:00(一休)</span></div>
+        <div class="cand-addr">Irabu-1396 · 免費停車</div>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=さとうきびの店ぶーずやー" target="_blank" rel="noopener">地圖</a>
+      </div>
+      <div class="cand">
+        <div class="cand-head"><h4>Banana cake factory <span class="jp">モンテドール本店</span></h4><span class="stars">★★★★☆</span></div>
+        <p class="cand-desc">宮古島代表性伴手禮名店,近宮古神社。招牌生香蕉蛋糕香甜不膩,香蕉牛奶也濃郁,適合買禮盒送人。</p>
+        <div class="cand-meta"><span>💰 生香蕉蛋糕380円</span><span>⏰ 9:00–19:00</span></div>
+        <div class="cand-addr">Nishizato-7-2, Hirara · 店旁免費停車</div>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=バナナケーキのモンテドール本店" target="_blank" rel="noopener">地圖</a>
+      </div>
+    </div>
+
+    <div class="cand-group">
+      <h3>景點候選</h3>
+      <div class="cand mini"><h4>宮古神社 <span class="jp" style="font-size:11px">(日本最南端神社,近漲水御嶽,推測即筆記中的「宮谷神社」)</span></h4>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=宮古神社 宮古島" target="_blank" rel="noopener">地圖</a>
+      </div>
+      <div class="cand">
+        <div class="cand-head"><h4>纜車 <span class="jp">ザ シギラリフト オーシャンスカイ</span></h4></div>
+        <p class="cand-desc">南部シギラリゾート內的空中纜車,連接海岸與丘陵兩端,沖繩縣第一座、也是日本最西/最南端的索道。</p>
+        <div class="cand-meta"><span>💰 來回800円・單程500円</span><span>⏰ 10:00–17:00(每週一・三,每月一次四五公休)</span></div>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=ザ シギラリフト オーシャンスカイ" target="_blank" rel="noopener">地圖</a>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:4px">
+      名單整理於 2026 年 7–9 月,實際營業時間、公休日、價格可能隨季節調整,尤其颱風前後,出發前建議再次確認。
     </div>
   </section>
 
