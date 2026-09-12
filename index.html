@@ -66,7 +66,7 @@
   }
   .mono{ font-family:'IBM Plex Mono',ui-monospace,monospace; font-variant-numeric:tabular-nums; }
   a{ color:var(--ocean); }
-  .wrap{ max-width:640px; margin:0 auto; padding:0 18px 80px; }
+  .wrap{ max-width:640px; margin:0 auto; padding:0 18px 90px; }
 
   /* ---------- Hero ---------- */
   .hero{
@@ -74,14 +74,14 @@
       radial-gradient(120% 140% at 20% -10%, color-mix(in srgb, var(--ocean-bright) 35%, transparent), transparent 60%),
       linear-gradient(160deg, var(--ocean) 0%, #0a3f52 100%);
     color:#eafbff;
-    padding:44px 18px 34px;
+    padding:36px 18px 26px;
     border-radius:0 0 28px 28px;
     position:relative;
     overflow:hidden;
   }
   .hero::after{
     content:"";
-    position:absolute; left:0; right:0; bottom:0; height:46%;
+    position:absolute; left:0; right:0; bottom:0; height:60%;
     background:
       repeating-linear-gradient(100deg, rgba(255,255,255,.05) 0 2px, transparent 2px 34px);
     opacity:.6;
@@ -92,29 +92,40 @@
     font-size:12px; letter-spacing:.14em; text-transform:uppercase;
     color:#bdeef8; opacity:.85; font-weight:600;
   }
-  .hero h1{ font-size:clamp(30px,8vw,40px); font-weight:800; margin-top:8px; letter-spacing:-0.01em; }
-  .hero .dates{ margin-top:6px; font-size:15px; color:#d6f2f7; }
+  .hero h1{ font-size:clamp(26px,7vw,34px); font-weight:800; margin-top:8px; letter-spacing:-0.01em; }
+  .hero .dates{ margin-top:6px; font-size:14px; color:#d6f2f7; }
 
-  .flightpath{
-    margin-top:26px; display:flex; align-items:center; gap:10px;
-    background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.18);
-    border-radius:16px; padding:14px 16px; backdrop-filter:blur(2px);
+  /* ---------- Tab bar ---------- */
+  .tabbar{
+    position:sticky; top:0; z-index:30;
+    display:flex; gap:8px; padding:12px 14px;
+    background:var(--bg); border-bottom:1px solid var(--line);
+    overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none;
   }
-  .fp-code{ font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:15px; }
-  .fp-sub{ font-size:11px; color:#bfe8ef; margin-top:2px; }
-  .fp-line{ flex:1; height:1px; background:repeating-linear-gradient(90deg, rgba(255,255,255,.55) 0 6px, transparent 6px 11px); position:relative; }
-  .fp-plane{ position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:13px; }
-  .flightpath-row + .flightpath-row{ margin-top:12px; }
-  .flightpath-row{ display:flex; align-items:center; gap:10px; }
-  .flightmeta{ display:flex; justify-content:space-between; margin-top:10px; font-size:11.5px; color:#bfe8ef; }
+  .tabbar::-webkit-scrollbar{ display:none; }
+  .tab-btn{
+    flex:1 0 auto; display:flex; align-items:center; justify-content:center; gap:6px;
+    padding:9px 10px; border-radius:22px; border:1px solid var(--line);
+    background:var(--surface); color:var(--ink-dim); font-family:inherit; font-size:13px; font-weight:700;
+    cursor:pointer; white-space:nowrap; transition:background .2s,color .2s,border-color .2s; -webkit-tap-highlight-color:transparent;
+  }
+  .tab-btn.active{ background:var(--ocean); border-color:var(--ocean); color:#fff; }
+  .tab-btn:focus-visible{ outline:2px solid var(--ocean-bright); outline-offset:2px; }
+
+  /* ---------- Swipeable pages ---------- */
+  .pages-viewport{ overflow:hidden; }
+  .pages-track{ display:flex; width:400%; transition:transform .32s cubic-bezier(.4,0,.2,1); }
+  .pages-track.dragging{ transition:none; }
+  .page{ width:25%; flex:0 0 25%; min-width:0; }
 
   /* ---------- Section shell ---------- */
   section{ margin-top:34px; }
+  section:first-child{ margin-top:26px; }
   .section-head{ display:flex; align-items:baseline; justify-content:space-between; margin-bottom:14px; }
   .section-head h2{ font-size:21px; font-weight:700; }
   .section-head .count{ font-size:12px; color:var(--ink-dim); font-family:'IBM Plex Mono',monospace; }
 
-  /* ---------- Hotel ticket cards ---------- */
+  /* ---------- Ticket / flight cards ---------- */
   .ticket{
     background:var(--surface);
     border:1px solid var(--line);
@@ -149,6 +160,28 @@
     color:var(--ocean); text-decoration:none; margin-top:10px;
   }
   .maplink svg{ width:13px; height:13px; }
+
+  .flightcard{
+    background:linear-gradient(160deg, var(--ocean) 0%, #0a3f52 100%);
+    color:#eafbff; border-radius:16px; padding:16px 18px; margin-bottom:14px;
+    box-shadow:0 8px 20px -14px var(--shadow);
+  }
+  .flightcard .tag{
+    display:inline-block; font-size:10.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+    color:#eafbff; background:rgba(255,255,255,.15); padding:3px 8px; border-radius:20px; margin-bottom:12px;
+  }
+  .flightpath{ display:flex; align-items:center; gap:10px; }
+  .fp-code{ font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:16px; }
+  .fp-sub{ font-size:11px; color:#bfe8ef; margin-top:2px; }
+  .fp-line{ flex:1; height:1px; background:repeating-linear-gradient(90deg, rgba(255,255,255,.55) 0 6px, transparent 6px 11px); position:relative; }
+  .fp-plane{ position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:13px; }
+  .flightmeta{ display:flex; justify-content:space-between; margin-top:10px; font-size:11.5px; color:#bfe8ef; }
+
+  .placeholder{
+    border:1.5px dashed var(--line); border-radius:16px; padding:22px 18px; text-align:center;
+    color:var(--ink-dim); font-size:13px;
+  }
+  .placeholder .icon{ font-size:22px; margin-bottom:8px; }
 
   /* ---------- Day cards ---------- */
   .day{
@@ -196,16 +229,6 @@
     background:color-mix(in srgb, var(--ocean) 12%, transparent); padding:2px 7px; border-radius:20px; margin-top:8px;
   }
 
-  /* ---------- Food ---------- */
-  .food-area{ margin-bottom:14px; }
-  .food-area h4{ font-size:13px; font-weight:700; color:var(--ink-dim); text-transform:uppercase; letter-spacing:.05em; margin-bottom:8px; }
-  .food-item{
-    display:flex; justify-content:space-between; gap:10px; padding:10px 0; border-top:1px solid var(--line);
-  }
-  .food-item:first-child{ border-top:none; }
-  .food-item .name{ font-size:14px; font-weight:600; }
-  .food-item .note{ font-size:12.5px; color:var(--ink-dim); margin-top:2px; }
-
   /* ---------- Candidate list (未定案候選) ---------- */
   .cand-intro{ font-size:13px; color:var(--ink-dim); margin-bottom:16px; }
   .cand-group{ margin-bottom:24px; }
@@ -225,7 +248,7 @@
   .cand-desc{ font-size:13px; color:var(--ink-dim); margin-top:6px; }
   .cand-meta{ display:flex; flex-wrap:wrap; gap:6px 14px; font-size:12px; color:var(--ink); margin-top:8px; font-weight:600; }
   .cand-addr{ font-size:11.5px; color:var(--ink-dim); margin-top:6px; }
-  .cand.mini{ display:flex; align-items:center; justify-content:space-between; padding:11px 15px; }
+  .cand.mini{ display:flex; align-items:center; justify-content:space-between; padding:11px 15px; gap:10px; }
   .cand.mini h4{ font-size:14px; font-weight:600; }
   .badge-wait{
     display:inline-block; font-size:10px; font-weight:700; color:var(--sunset);
@@ -251,13 +274,13 @@
   .pack-item.checked{ opacity:.5; text-decoration:line-through; }
   .pack-note{ grid-column:1 / -1; font-size:12px; color:var(--ink-dim); padding:4px 2px 0; }
 
-  footer{ margin-top:40px; text-align:center; font-size:11.5px; color:var(--ink-dim); }
+  footer{ padding:26px 18px 40px; text-align:center; font-size:11.5px; color:var(--ink-dim); }
 
   @media (max-width:420px){
     .grid2, .pack-grid{ grid-template-columns:1fr; }
   }
   @media (prefers-reduced-motion:no-preference){
-    .day, .ticket{ animation:rise .5s ease both; }
+    .day, .ticket, .flightcard{ animation:rise .5s ease both; }
   }
   @keyframes rise{ from{ opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;} }
 </style>
@@ -269,460 +292,553 @@
     <div class="eyebrow">Okinawa · Miyakojima</div>
     <h1>宮古島 4 天 3 夜</h1>
     <div class="dates">2026.09.20 (日) → 09.23 (三)</div>
-
-    <div class="flightpath">
-      <div style="width:100%">
-        <div class="flightpath-row">
-          <div>
-            <div class="fp-code">TPE</div>
-            <div class="fp-sub">台北</div>
-          </div>
-          <div class="fp-line"><span class="fp-plane">✈</span></div>
-          <div style="text-align:right">
-            <div class="fp-code">SHI</div>
-            <div class="fp-sub">下地島</div>
-          </div>
-        </div>
-        <div class="flightmeta">
-          <span>JX890 · 09/20 13:00 抵達</span>
-        </div>
-        <div class="flightpath-row" style="margin-top:14px">
-          <div>
-            <div class="fp-code">SHI</div>
-            <div class="fp-sub">下地島</div>
-          </div>
-          <div class="fp-line"><span class="fp-plane">✈</span></div>
-          <div style="text-align:right">
-            <div class="fp-code">TPE</div>
-            <div class="fp-sub">台北</div>
-          </div>
-        </div>
-        <div class="flightmeta">
-          <span>JX891 · 09/23 14:00 起飛</span>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
 
-<div class="wrap">
-
-  <div class="callout" style="margin-top:28px">
-    <b>注意</b> — 進出都走「みやこ下地島空港(SHI)」,在伊良部島上,跟「宮古空港(MMY)」是不同機場,兩地開車約 20–25 分鐘(經伊良部大橋)。租車導航跟還車地點都要認住 SHI。
-  </div>
-
-  <section>
-    <div class="section-head"><h2>住宿</h2><span class="count">2 間</span></div>
-
-    <div class="ticket">
-      <div class="ticket-top">
-        <span class="tag">Night 1–2</span>
-        <h3>宮古島 11 號公寓飯店</h3>
-        <div class="addr">Apartment Hotel 11 Miyakojima · 沖縄県宮古島市平良松原558-3</div>
-        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=宮古島市平良松原558-3" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11a7 7 0 1 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
-          在 Google 地圖開啟
-        </a>
-      </div>
-      <div class="stub">
-        <div><div class="lbl">Check-in</div><div class="val">09/20 16:00</div></div>
-        <div><div class="lbl">Check-out</div><div class="val">09/22 10:00</div></div>
-      </div>
-    </div>
-
-    <div class="ticket">
-      <div class="ticket-top">
-        <span class="tag">Night 3</span>
-        <h3>Canopy by Hilton Okinawa Miyako Island Resort</h3>
-        <div class="addr">沖縄県宮古島市平良久貝550-7 · Turibaa 度假區,近伊良部大橋 / パイナガマビーチ</div>
-        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=宮古島市平良久貝550-7 Canopy by Hilton" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11a7 7 0 1 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
-          在 Google 地圖開啟
-        </a>
-      </div>
-      <div class="stub">
-        <div><div class="lbl">Check-in</div><div class="val">09/22 15:00</div></div>
-        <div><div class="lbl">Check-out</div><div class="val">09/23 11:00</div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== DAY 1 ===== -->
-  <section>
-    <div class="section-head"><h2>行程</h2><span class="count">4 days</span></div>
-    <div class="cand-intro" style="margin-top:-6px">Day 1–2 是草案,還沒完全定案,可以搭配下面的「候選清單」隨時調換;Day 3 晚上進 Canopy Hilton 之後就確定不排行程。</div>
-
-    <div class="day" style="--accent:var(--ocean)">
-      <div class="day-head">
-        <div class="day-num">01</div>
-        <div>
-          <div class="day-date">09/20 (日)</div>
-          <div class="day-title">抵達・伊良部跨海兜風</div>
-        </div>
-      </div>
-      <div class="timeline">
-        <div class="stop">
-          <div class="time">13:00</div>
-          <h4>下地島空港降落,領行李、取租車</h4>
-          <p>下地島空港航廈頂樓有免費觀景台,等車時可以先上去拍一張。</p>
-        </div>
-        <div class="stop">
-          <div class="time">13:30</div>
-          <h4>17END</h4>
-          <p>機場旁順路的絕景海岸,離岸越遠海水藍色越深,10 分鐘打卡剛好。</p>
-          <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=17END 宮古島 下地島" target="_blank" rel="noopener">地圖</a>
-        </div>
-        <div class="stop">
-          <div class="time">14:00</div>
-          <h4>伊良部大橋跨海兜風</h4>
-          <p>全長 3,540m,日本最長免費跨海大橋,橋上就是宮古藍全景。</p>
-          <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=伊良部大橋" target="_blank" rel="noopener">地圖</a>
-        </div>
-        <div class="stop">
-          <div class="time">15:00</div>
-          <h4>Check-in 11 號公寓飯店</h4>
-          <p>放行李、稍作休息。</p>
-        </div>
-        <div class="stop">
-          <div class="time">17:00</div>
-          <h4>砂山ビーチ 散步・看日落</h4>
-          <p>市區車程約 10 分鐘,天然岩石拱門是招牌畫面,9 月日落約 18:20。</p>
-          <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=砂山ビーチ 宮古島" target="_blank" rel="noopener">地圖</a>
-        </div>
-        <div class="stop">
-          <div class="time">19:00</div>
-          <h4>晚餐・西里通り / 下里大通り</h4>
-          <p>宮古そば、居酒屋、海鮮都集中在這兩條街,飯店走路可到。</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- ===== DAY 2 ===== -->
-    <div class="day" style="--accent:var(--ocean-bright)">
-      <div class="day-head">
-        <div class="day-num">02</div>
-        <div>
-          <div class="day-date">09/21 (一)</div>
-          <div class="day-title">體驗潛水・南岸海灘</div>
-        </div>
-      </div>
-      <div class="timeline">
-        <div class="stop">
-          <div class="time">09:00</div>
-          <h4>半日體驗潛水(需自行預約)</h4>
-          <p>選少人數店家較安心,如 EARTH-LENS、サンアイランド宮古島、Step 海 Divers School。詳見下方「潛水」區塊。</p>
-        </div>
-        <div class="stop">
-          <div class="time">12:30</div>
-          <h4>簡單午餐</h4>
-          <p>潛店附近覓食,或直接前往前浜方向路上的食堂。</p>
-        </div>
-        <div class="stop">
-          <div class="time">14:00</div>
-          <h4>與那覇前浜海灘</h4>
-          <p>號稱「東洋第一美灘」,7km 純白沙加透明宮古藍,可遠眺來間大橋。</p>
-          <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=与那覇前浜ビーチ" target="_blank" rel="noopener">地圖</a>
-        </div>
-        <div class="stop">
-          <div class="time">15:30</div>
-          <h4>來間大橋 → 龍宮城展望台</h4>
-          <p>橋上是「來間藍」,展望台可從高處把前浜海灘全景一次看完。</p>
-          <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=竜宮城展望台 宮古島" target="_blank" rel="noopener">地圖</a>
-        </div>
-        <div class="stop">
-          <div class="time">18:00</div>
-          <h4>返回平良,晚餐</h4>
-          <p>今天曬了一整天,找間有冷氣的居酒屋坐下來吃。</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- ===== DAY 3 ===== -->
-    <div class="day" style="--accent:var(--sunset)">
-      <div class="day-head">
-        <div class="day-num">03</div>
-        <div>
-          <div class="day-date">09/22 (二)</div>
-          <div class="day-title">東平安名崎・轉往度假村</div>
-        </div>
-      </div>
-      <div class="timeline">
-        <div class="stop">
-          <div class="time">10:00</div>
-          <h4>退房・11 號公寓飯店</h4>
-          <p>行李先上車,今天走一圈東側再轉去 Canopy Hilton。</p>
-        </div>
-        <div class="stop">
-          <div class="time">10:40</div>
-          <h4>東平安名崎</h4>
-          <p>國家指定名勝,宮古島東南端細長岬角,走到底是白燈塔,360° 海景。市區開車約 35 分鐘。</p>
-          <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=東平安名崎" target="_blank" rel="noopener">地圖</a>
-        </div>
-        <div class="stop">
-          <div class="time">12:00</div>
-          <h4>雪鹽製鹽所</h4>
-          <p>順路,雪鹽霜淇淋 + 伴手禮一次買齊。</p>
-          <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=雪塩製塩所 宮古島" target="_blank" rel="noopener">地圖</a>
-        </div>
-        <div class="stop">
-          <div class="time">13:00</div>
-          <h4>午餐 + 公設市場伴手禮</h4>
-          <p>回程順路繞平良市區,公設市場買點心跟乾貨。</p>
-        </div>
-        <div class="stop">
-          <div class="time">15:00</div>
-          <h4>Check-in Canopy by Hilton</h4>
-          <p>頂樓無邊際泳池正對伊良部大橋,今晚開始不排行程。</p>
-        </div>
-      </div>
-      <div class="rest-block">🌴 <b>今晚起在飯店耍廢</b> — 頂樓泳池、房間、看日落,故意不排行程。</div>
-    </div>
-
-    <!-- ===== DAY 4 ===== -->
-    <div class="day" style="--accent:var(--ink-dim)">
-      <div class="day-head">
-        <div class="day-num">04</div>
-        <div>
-          <div class="day-date">09/23 (三)</div>
-          <div class="day-title">退房・還車・返程</div>
-        </div>
-      </div>
-      <div class="rest-block" style="margin-top:0">🛎️ <b>早上在度假村自由活動</b>,不排行程 — 睡到自然醒、吃早餐、再游一次泳池。</div>
-      <div class="timeline">
-        <div class="stop">
-          <div class="time">11:00</div>
-          <h4>退房・Canopy by Hilton</h4>
-        </div>
-        <div class="stop">
-          <div class="time">11:30</div>
-          <h4>還車</h4>
-          <p>從飯店到下地島空港約 25 分鐘,還車後留一點緩衝時間。</p>
-        </div>
-        <div class="stop">
-          <div class="time">12:00</div>
-          <h4>抵達下地島空港</h4>
-          <p>時間夠的話上頂樓觀景台再拍一張。</p>
-        </div>
-        <div class="stop">
-          <div class="time">14:00</div>
-          <h4>JX891 起飛,飛回台北</h4>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="section-head"><h2>潛水店家</h2><span class="count">自行預約</span></div>
-    <div class="grid2">
-      <div class="pick">
-        <h4>EARTH-LENS</h4>
-        <p>1–4 人小團,新手友善,教練帶得細。</p>
-        <span class="badge">少人數</span>
-      </div>
-      <div class="pick">
-        <h4>サンアイランド宮古島</h4>
-        <p>2002 年開業,家族經營,老牌穩定。</p>
-        <span class="badge">老牌</span>
-      </div>
-      <div class="pick">
-        <h4>Step 海 Divers School</h4>
-        <p>1 人也能報名,包場式體驗潛水。</p>
-        <span class="badge">彈性</span>
-      </div>
-      <div class="pick">
-        <h4>アクアティックアドベンチャー</h4>
-        <p>天天出船,新手到老手都收。</p>
-        <span class="badge">天天出船</span>
-      </div>
-    </div>
-    <div class="callout" style="margin-top:12px">
-      9 月仍是颱風尾,建議選<b>可免費改期</b>的方案,出發前一週再密切關注海況。
-    </div>
-  </section>
-
-  <section>
-    <div class="section-head"><h2>候選清單</h2><span class="count">未定案</span></div>
-    <div class="cand-intro">行程還沒定,先把找到的口袋名單整理起來,到時候看天氣、心情、有沒有位子再彈性挑。</div>
-
-    <div class="cand-group">
-      <h3>正餐</h3>
-      <div class="cand mini"><h4>Blue Turtle 宮古島</h4>
-        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=Blue Turtle 宮古島" target="_blank" rel="noopener">地圖</a>
-      </div>
-      <div class="cand mini"><h4>國仲商店</h4>
-        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=国仲商店 宮古島" target="_blank" rel="noopener">地圖</a>
-      </div>
-      <div class="cand mini"><h4>宮古牛焼肉 玉城 <span class="badge-wait">候補中・目前沒位</span></h4>
-        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=宮古牛焼肉 玉城 宮古島" target="_blank" rel="noopener">地圖</a>
-      </div>
-      <div class="cand mini"><h4>木炭烤肉 琉宮園 <span class="badge-wait">候補中・目前沒位</span></h4>
-        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=琉宮園 宮古島" target="_blank" rel="noopener">地圖</a>
-      </div>
-      <div class="cand">
-        <div class="cand-head"><h4>Today's… <span class="jp">Shima Bistro TAJIYA</span></h4><span class="stars">★★★★★</span></div>
-        <p class="cand-desc">南邊人氣輕食餐廳,波希米亞海洋風裝潢。推薦鮪魚 POKE BOWL、宮古牛燒肉 TJY Bowl、TJY Curry、Maqui Berry Bowl。11:00 開店前就常客滿,建議提早 30 分。</p>
-        <div class="cand-meta"><span>💰 早餐880–1880円・午餐980–1380円</span><span>⏰ 8–10 / 11–15(二四休)</span></div>
-        <div class="cand-addr">Sunagawa-1168-2, Gusukube · 店前僅約 3 車位,建議搭車前往</div>
-        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=Shima Bistro TAJIYA 宮古島" target="_blank" rel="noopener">地圖</a>
-      </div>
-    </div>
-
-    <div class="cand-group">
-      <h3>冰品・果昔</h3>
-      <div class="cand">
-        <div class="cand-head"><h4>EIGHT smoothie's <span class="jp">エイトスムージー</span></h4><span class="stars">★★★★★</span></div>
-        <p class="cand-desc">全宮古島最好喝的新鮮水果冰沙,現點現做,açaí bowl 也推薦。白色貨櫃屋+粉紅裝潢很好拍。</p>
-        <div class="cand-meta"><span>💰 700–1500円</span><span>⏰ 11:00–17:00(週二休)</span></div>
-        <div class="cand-addr">Nishinakasone-460-5, Hirara · 店旁免費停車</div>
-        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=エイトスムージー 宮古島" target="_blank" rel="noopener">地圖</a>
-      </div>
-      <div class="cand">
-        <div class="cand-head"><h4>Blue Seal <span class="jp">宮古島パイナガマ店</span></h4><span class="stars">★★★★☆</span></div>
-        <p class="cand-desc">沖繩最知名冰淇淋連鎖,推香檬雪酪、紅芋、琉球紅茶麻糬口味。冰淇淋主題裝潢很好拍。</p>
-        <div class="cand-meta"><span>💰 390–1000円</span><span>⏰ 10:00–20:00</span></div>
-        <div class="cand-addr">Kugai-654-23, Hirara · 店門口免費停車</div>
-        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=ブルーシール 宮古島パイナガマ店" target="_blank" rel="noopener">地圖</a>
-      </div>
-      <div class="cand">
-        <div class="cand-head"><h4>RICCO gelato <span class="jp">リッコジェラート</span></h4><span class="stars">★★★☆☆</span></div>
-        <p class="cand-desc">當地食材義式 Gelato,雪鹽、芒果、草莓口味中規中矩,市區順路解暑用。</p>
-        <div class="cand-meta"><span>💰 600–960円</span><span>⏰ 週日一四五12–17:45,週六16–20:30(二三休)</span></div>
-        <div class="cand-addr">Shimozato-550, Hirara · 無專屬車位,附近投幣停車場步行1–3分</div>
-        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=リッコジェラート 宮古島" target="_blank" rel="noopener">地圖</a>
-      </div>
-      <div class="cand">
-        <div class="cand-head"><h4>gelato Cafe Ninufa</h4><span class="stars">★★★★☆</span></div>
-        <p class="cand-desc">池間島隱藏景觀咖啡廳,旁邊就是可拍心形岩的 Ikizu Beach。百香果 gelato 清爽,窯烤披薩也好吃,店內沒冷氣。</p>
-        <div class="cand-meta"><span>💰 gelato 650–850円・披薩1600–2500円</span><span>⏰ 10:00–17:00(週三休)</span></div>
-        <div class="cand-addr">Maezato-976-1, Hirara · 店旁免費停車</div>
-        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=gelato Cafe Ninufa 池間島" target="_blank" rel="noopener">地圖</a>
-      </div>
-    </div>
-
-    <div class="cand-group">
-      <h3>咖啡・烘焙</h3>
-      <div class="cand">
-        <div class="cand-head"><h4>Ningin Coffee <span class="jp">ニンギン珈琲</span></h4><span class="stars">★★★★☆</span></div>
-        <p class="cand-desc">在地咖啡職人推薦第一名,招牌熱黑糖拿鐵順口,巴斯克蛋糕也是人氣款,生意很好常常客滿。</p>
-        <div class="cand-meta"><span>💰 咖啡550–950円・蛋糕750円</span><span>⏰ 9:00–17:00</span></div>
-        <div class="cand-addr">Kugai-670-4 1F, Hirara · 門口約3個路邊車位</div>
-        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=ニンギン珈琲 宮古島" target="_blank" rel="noopener">地圖</a>
-      </div>
-      <div class="cand">
-        <div class="cand-head"><h4>Moja's Bakery <span class="jp">モジャのパン屋</span></h4><span class="stars">★★★★☆</span></div>
-        <p class="cand-desc">市區人氣麵包店,近宮古神社,開店前就大排長龍,中午前常完售。建議 9:40 前到。巧克力、紅豆、黑糖包餡是人氣款,咖啡只能外帶。</p>
-        <div class="cand-meta"><span>💰 麵包250–380円(僅現金)</span><span>⏰ 二至五10–15,六10–12:30(日一休)</span></div>
-        <div class="cand-addr">Higashinakasone-20, Hirara · 專屬4車位(步行2分),或附近收費停車場</div>
-        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=モジャのパン屋 宮古島" target="_blank" rel="noopener">地圖</a>
-      </div>
-      <div class="cand">
-        <div class="cand-head"><h4>cafeまほーてらす</h4><span class="stars">★★★★☆</span></div>
-        <p class="cand-desc">巷弄內隱藏咖啡廳,同時是間 Hostel(Mahho Terrace)。手工貝果保留麥香、口感彈牙,是招牌。</p>
-        <div class="cand-meta"><span>💰 貝果三明治900–1200円</span><span>⏰ 三至五8–15,六日8–13(二休)</span></div>
-        <div class="cand-addr">Nishizato-182-3, Hirara · 門口約3個車位</div>
-        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=cafeまほーてらす 宮古島" target="_blank" rel="noopener">地圖</a>
-      </div>
-      <div class="cand">
-        <div class="cand-head"><h4>ensemble coffee miyakoisland</h4><span class="stars">★★★★☆</span></div>
-        <p class="cand-desc">少數現代風格咖啡廳,海洋元素裝潢好拍。手沖咖啡香氣足,巴西莓碗給料豐富。</p>
-        <div class="cand-meta"><span>💰 咖啡400–700円・莓果碗1400円</span><span>⏰ 10:00–18:00(二三休)</span></div>
-        <div class="cand-addr">Kugai-1068-9, Hirara · 路邊不便,旁邊永旺城購物中心可停車</div>
-        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=ensemble coffee miyakoisland" target="_blank" rel="noopener">地圖</a>
-      </div>
-    </div>
-
-    <div class="cand-group">
-      <h3>甜點・伴手禮・在地小吃</h3>
-      <div class="cand">
-        <div class="cand-head"><h4>雪塩ミュージアム <span class="jp">雪鹽工廠</span></h4><span class="stars">★★★★★</span></div>
-        <p class="cand-desc">觀光客必訪,世界最細鹽做的冰淇淋,鹹香奶香很特別。可參觀製程、試吃各種調味料,伴手禮一次買齊。</p>
-        <div class="cand-meta"><span>💰 冰淇淋400–600円(冰淇淋機需現金)</span><span>⏰ 9:00–18:00</span></div>
-        <div class="cand-addr">Karimata-191, Hirara(北端) · 免費停車</div>
-        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=雪塩ミュージアム 宮古島" target="_blank" rel="noopener">地圖</a>
-      </div>
-      <div class="cand">
-        <div class="cand-head"><h4>宮古きび茶屋 <span class="jp">さとうきび甘味処</span></h4><span class="stars">★★★★★</span></div>
-        <p class="cand-desc">可以自己選甘蔗現榨甘蔗汁,還有黑糖黃豆粉刨冰、白玉糰子。鐵皮屋藏在甘蔗田小路裡,生意很好。跟雪鹽工廠很近,可安排同一天。</p>
-        <div class="cand-meta"><span>💰 飲品500–1100円・甜品550–1000円</span><span>⏰ 10:00–15:45</span></div>
-        <div class="cand-addr">Karimata-129, Hirara · 免費停車</div>
-        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=宮古きび茶屋 宮古島" target="_blank" rel="noopener">地圖</a>
-      </div>
-      <div class="cand">
-        <div class="cand-head"><h4>ぐるぐるめんや</h4><span class="stars">★★★★☆</span></div>
-        <p class="cand-desc">傳統日式刨冰(野葡萄、紅芋),份量大適合分享。店裡賣的「宮古うずまきそば」漩渦麵無添加、耐煮,很值得買回家。</p>
-        <div class="cand-meta"><span>💰 刨冰1300–1600円(僅現金)</span><span>⏰ 11:30–17:30(二三四休)</span></div>
-        <div class="cand-addr">Tomori-306-5, Gusukube · 免費停車</div>
-        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=ぐるぐるめんや 宮古島" target="_blank" rel="noopener">地圖</a>
-      </div>
-      <div class="cand">
-        <div class="cand-head"><h4>Aragusuku Honeybee Garden <span class="jp">あらぐすくミツバチガーデン</span></h4><span class="stars">★★★★☆</span></div>
-        <p class="cand-desc">自家養蜂蜂蜜專門店,招牌蜂蜜堅果冰淇淋濃郁不膩。店內真的有蜜蜂在飛,小孩會覺得新奇。收得早,要抓緊時間去。</p>
-        <div class="cand-meta"><span>💰 冰淇淋700–850円</span><span>⏰ 11:30–15:00(一二休)</span></div>
-        <div class="cand-addr">Aragusuku-798-1, Gusukube · 門口免費停車</div>
-        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=あらぐすくミツバチガーデン" target="_blank" rel="noopener">地圖</a>
-      </div>
-      <div class="cand">
-        <div class="cand-head"><h4>Nakayukui Shoten <span class="jp">なかゆくい商店</span></h4><span class="stars">★★★★★</span></div>
-        <p class="cand-desc">伊良部島排隊名店,炸紅芋球外酥內Q不甜膩,配冰淇淋剛好。常賣完就關店,建議早點或提早到下午開店前排隊。停車場在店後方,入口不對著店面,第一次去容易錯過。</p>
-        <div class="cand-meta"><span>💰 120円/顆,加冰淇淋450円(僅現金)</span><span>⏰ 9:30–12 / 13:30–14(一四休,賣完打烊)</span></div>
-        <div class="cand-addr">Kuninaka-57-3, Irabu</div>
-        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=なかゆくい商店 伊良部島" target="_blank" rel="noopener">地圖</a>
-      </div>
-      <div class="cand">
-        <div class="cand-head"><h4>さとうきびの店ぶーずやー</h4><span class="stars">★★★★☆</span></div>
-        <p class="cand-desc">伊良部島隱藏黑糖專賣店,開在糖廠旁。招牌黑糖珍珠拿鐵無咖啡因,偏甜可請老闆少加糖。吸管都是甘蔗做的。</p>
-        <div class="cand-meta"><span>💰 飲品400–1000円(僅現金)</span><span>⏰ 12:00–18:00(一休)</span></div>
-        <div class="cand-addr">Irabu-1396 · 免費停車</div>
-        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=さとうきびの店ぶーずやー" target="_blank" rel="noopener">地圖</a>
-      </div>
-      <div class="cand">
-        <div class="cand-head"><h4>Banana cake factory <span class="jp">モンテドール本店</span></h4><span class="stars">★★★★☆</span></div>
-        <p class="cand-desc">宮古島代表性伴手禮名店,近宮古神社。招牌生香蕉蛋糕香甜不膩,香蕉牛奶也濃郁,適合買禮盒送人。</p>
-        <div class="cand-meta"><span>💰 生香蕉蛋糕380円</span><span>⏰ 9:00–19:00</span></div>
-        <div class="cand-addr">Nishizato-7-2, Hirara · 店旁免費停車</div>
-        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=バナナケーキのモンテドール本店" target="_blank" rel="noopener">地圖</a>
-      </div>
-    </div>
-
-    <div class="cand-group">
-      <h3>景點候選</h3>
-      <div class="cand mini"><h4>宮古神社 <span class="jp" style="font-size:11px">(日本最南端神社,近漲水御嶽,推測即筆記中的「宮谷神社」)</span></h4>
-        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=宮古神社 宮古島" target="_blank" rel="noopener">地圖</a>
-      </div>
-      <div class="cand">
-        <div class="cand-head"><h4>纜車 <span class="jp">ザ シギラリフト オーシャンスカイ</span></h4></div>
-        <p class="cand-desc">南部シギラリゾート內的空中纜車,連接海岸與丘陵兩端,沖繩縣第一座、也是日本最西/最南端的索道。</p>
-        <div class="cand-meta"><span>💰 來回800円・單程500円</span><span>⏰ 10:00–17:00(每週一・三,每月一次四五公休)</span></div>
-        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=ザ シギラリフト オーシャンスカイ" target="_blank" rel="noopener">地圖</a>
-      </div>
-    </div>
-
-    <div class="callout" style="margin-top:4px">
-      名單整理於 2026 年 7–9 月,實際營業時間、公休日、價格可能隨季節調整,尤其颱風前後,出發前建議再次確認。
-    </div>
-  </section>
-
-  <section>
-    <div class="section-head"><h2>行前清單</h2></div>
-    <div class="pack-grid" id="packGrid">
-      <label class="pack-item"><input type="checkbox" data-key="license"> 台灣駕照日文譯本(非國際駕照!)</label>
-      <label class="pack-item"><input type="checkbox" data-key="swim"> 泳衣 ×2(輪流曬乾)</label>
-      <label class="pack-item"><input type="checkbox" data-key="reef"> 珊瑚礁友善防曬乳</label>
-      <label class="pack-item"><input type="checkbox" data-key="shoes"> 水陸兩用鞋(礁石多)</label>
-      <label class="pack-item"><input type="checkbox" data-key="towel"> 快乾毛巾</label>
-      <label class="pack-item"><input type="checkbox" data-key="phonebag"> 防水手機袋</label>
-      <label class="pack-item"><input type="checkbox" data-key="hat"> 遮陽帽 / 墨鏡</label>
-      <label class="pack-item"><input type="checkbox" data-key="rain"> 薄雨衣(9 月午後雷陣雨)</label>
-      <label class="pack-item"><input type="checkbox" data-key="powerbank"> 行動電源</label>
-      <label class="pack-item"><input type="checkbox" data-key="meds"> 個人常備藥</label>
-      <div class="pack-note">駕照譯本可在台灣監理站或線上申請,建議出發前至少 2 週辦好。</div>
-    </div>
-  </section>
-
-  <footer>宮古島 2026.09.20 – 09.23 · 自駕行程</footer>
+<div class="tabbar" id="tabbar">
+  <button class="tab-btn" data-tab="itin">🗓️ 行程</button>
+  <button class="tab-btn" data-tab="cand">📍 候選</button>
+  <button class="tab-btn" data-tab="tix">🎫 票券</button>
+  <button class="tab-btn" data-tab="pack">🧳 清單</button>
 </div>
+
+<div class="pages-viewport">
+  <div class="pages-track" id="pagesTrack">
+
+    <!-- ============ PAGE: 行程 ============ -->
+    <div class="page" data-page="itin"><div class="wrap">
+
+      <section>
+        <div class="section-head"><h2>行程</h2><span class="count">4 days</span></div>
+        <div class="cand-intro" style="margin-top:-6px">Day 1–2 是草案,還沒完全定案,可以搭配「候選」分頁隨時調換;Day 3 晚上進 Canopy Hilton 之後就確定不排行程。</div>
+
+        <div class="day" style="--accent:var(--ocean)">
+          <div class="day-head">
+            <div class="day-num">01</div>
+            <div>
+              <div class="day-date">09/20 (日)</div>
+              <div class="day-title">抵達・伊良部跨海兜風</div>
+            </div>
+          </div>
+          <div class="timeline">
+            <div class="stop">
+              <div class="time">13:00</div>
+              <h4>下地島空港降落,領行李、取租車</h4>
+              <p>下地島空港航廈頂樓有免費觀景台,等車時可以先上去拍一張。</p>
+            </div>
+            <div class="stop">
+              <div class="time">13:30</div>
+              <h4>17END</h4>
+              <p>機場旁順路的絕景海岸,離岸越遠海水藍色越深,10 分鐘打卡剛好。</p>
+              <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=17END 宮古島 下地島" target="_blank" rel="noopener">地圖</a>
+            </div>
+            <div class="stop">
+              <div class="time">14:00</div>
+              <h4>伊良部大橋跨海兜風</h4>
+              <p>全長 3,540m,日本最長免費跨海大橋,橋上就是宮古藍全景。</p>
+              <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=伊良部大橋" target="_blank" rel="noopener">地圖</a>
+            </div>
+            <div class="stop">
+              <div class="time">15:00</div>
+              <h4>Check-in 11 號公寓飯店</h4>
+              <p>放行李、稍作休息。</p>
+            </div>
+            <div class="stop">
+              <div class="time">17:00</div>
+              <h4>砂山ビーチ 散步・看日落</h4>
+              <p>市區車程約 10 分鐘,天然岩石拱門是招牌畫面,9 月日落約 18:20。</p>
+              <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=砂山ビーチ 宮古島" target="_blank" rel="noopener">地圖</a>
+            </div>
+            <div class="stop">
+              <div class="time">19:00</div>
+              <h4>晚餐・西里通り / 下里大通り</h4>
+              <p>宮古そば、居酒屋、海鮮都集中在這兩條街,飯店走路可到。</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="day" style="--accent:var(--ocean-bright)">
+          <div class="day-head">
+            <div class="day-num">02</div>
+            <div>
+              <div class="day-date">09/21 (一)</div>
+              <div class="day-title">體驗潛水・南岸海灘</div>
+            </div>
+          </div>
+          <div class="timeline">
+            <div class="stop">
+              <div class="time">09:00</div>
+              <h4>半日體驗潛水(需自行預約)</h4>
+              <p>選少人數店家較安心,如 EARTH-LENS、サンアイランド宮古島、Step 海 Divers School。詳見「候選」分頁的潛水店家。</p>
+            </div>
+            <div class="stop">
+              <div class="time">12:30</div>
+              <h4>簡單午餐</h4>
+              <p>潛店附近覓食,或直接前往前浜方向路上的食堂。</p>
+            </div>
+            <div class="stop">
+              <div class="time">14:00</div>
+              <h4>與那覇前浜海灘</h4>
+              <p>號稱「東洋第一美灘」,7km 純白沙加透明宮古藍,可遠眺來間大橋。</p>
+              <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=与那覇前浜ビーチ" target="_blank" rel="noopener">地圖</a>
+            </div>
+            <div class="stop">
+              <div class="time">15:30</div>
+              <h4>來間大橋 → 龍宮城展望台</h4>
+              <p>橋上是「來間藍」,展望台可從高處把前浜海灘全景一次看完。</p>
+              <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=竜宮城展望台 宮古島" target="_blank" rel="noopener">地圖</a>
+            </div>
+            <div class="stop">
+              <div class="time">18:00</div>
+              <h4>返回平良,晚餐</h4>
+              <p>今天曬了一整天,找間有冷氣的居酒屋坐下來吃。</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="day" style="--accent:var(--sunset)">
+          <div class="day-head">
+            <div class="day-num">03</div>
+            <div>
+              <div class="day-date">09/22 (二)</div>
+              <div class="day-title">東平安名崎・轉往度假村</div>
+            </div>
+          </div>
+          <div class="timeline">
+            <div class="stop">
+              <div class="time">10:00</div>
+              <h4>退房・11 號公寓飯店</h4>
+              <p>行李先上車,今天走一圈東側再轉去 Canopy Hilton。</p>
+            </div>
+            <div class="stop">
+              <div class="time">10:40</div>
+              <h4>東平安名崎</h4>
+              <p>國家指定名勝,宮古島東南端細長岬角,走到底是白燈塔,360° 海景。市區開車約 35 分鐘。</p>
+              <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=東平安名崎" target="_blank" rel="noopener">地圖</a>
+            </div>
+            <div class="stop">
+              <div class="time">12:00</div>
+              <h4>雪鹽製鹽所</h4>
+              <p>順路,雪鹽霜淇淋 + 伴手禮一次買齊。</p>
+              <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=雪塩製塩所 宮古島" target="_blank" rel="noopener">地圖</a>
+            </div>
+            <div class="stop">
+              <div class="time">13:00</div>
+              <h4>午餐 + 公設市場伴手禮</h4>
+              <p>回程順路繞平良市區,公設市場買點心跟乾貨。</p>
+            </div>
+            <div class="stop">
+              <div class="time">15:00</div>
+              <h4>Check-in Canopy by Hilton</h4>
+              <p>頂樓無邊際泳池正對伊良部大橋,今晚開始不排行程。</p>
+            </div>
+          </div>
+          <div class="rest-block">🌴 <b>今晚起在飯店耍廢</b> — 頂樓泳池、房間、看日落,故意不排行程。</div>
+        </div>
+
+        <div class="day" style="--accent:var(--ink-dim)">
+          <div class="day-head">
+            <div class="day-num">04</div>
+            <div>
+              <div class="day-date">09/23 (三)</div>
+              <div class="day-title">退房・還車・返程</div>
+            </div>
+          </div>
+          <div class="rest-block" style="margin-top:0">🛎️ <b>早上在度假村自由活動</b>,不排行程 — 睡到自然醒、吃早餐、再游一次泳池。</div>
+          <div class="timeline">
+            <div class="stop">
+              <div class="time">11:00</div>
+              <h4>退房・Canopy by Hilton</h4>
+            </div>
+            <div class="stop">
+              <div class="time">11:30</div>
+              <h4>還車</h4>
+              <p>從飯店到下地島空港約 25 分鐘,還車後留一點緩衝時間。</p>
+            </div>
+            <div class="stop">
+              <div class="time">12:00</div>
+              <h4>抵達下地島空港</h4>
+              <p>時間夠的話上頂樓觀景台再拍一張。</p>
+            </div>
+            <div class="stop">
+              <div class="time">14:00</div>
+              <h4>JX891 起飛,飛回台北</h4>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div></div>
+
+    <!-- ============ PAGE: 候選 ============ -->
+    <div class="page" data-page="cand"><div class="wrap">
+
+      <section>
+        <div class="section-head"><h2>潛水店家</h2><span class="count">自行預約</span></div>
+        <div class="grid2">
+          <div class="pick">
+            <h4>EARTH-LENS</h4>
+            <p>1–4 人小團,新手友善,教練帶得細。</p>
+            <span class="badge">少人數</span>
+          </div>
+          <div class="pick">
+            <h4>サンアイランド宮古島</h4>
+            <p>2002 年開業,家族經營,老牌穩定。</p>
+            <span class="badge">老牌</span>
+          </div>
+          <div class="pick">
+            <h4>Step 海 Divers School</h4>
+            <p>1 人也能報名,包場式體驗潛水。</p>
+            <span class="badge">彈性</span>
+          </div>
+          <div class="pick">
+            <h4>アクアティックアドベンチャー</h4>
+            <p>天天出船,新手到老手都收。</p>
+            <span class="badge">天天出船</span>
+          </div>
+        </div>
+        <div class="callout" style="margin-top:12px">
+          9 月仍是颱風尾,建議選<b>可免費改期</b>的方案,出發前一週再密切關注海況。
+        </div>
+      </section>
+
+      <section>
+        <div class="section-head"><h2>候選清單</h2><span class="count">未定案</span></div>
+        <div class="cand-intro">行程還沒定,先把找到的口袋名單整理起來,到時候看天氣、心情、有沒有位子再彈性挑。</div>
+
+        <div class="cand-group">
+          <h3>正餐</h3>
+          <div class="cand mini"><h4>Blue Turtle 宮古島</h4>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=Blue Turtle 宮古島" target="_blank" rel="noopener">地圖</a>
+          </div>
+          <div class="cand mini"><h4>國仲商店</h4>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=国仲商店 宮古島" target="_blank" rel="noopener">地圖</a>
+          </div>
+          <div class="cand mini"><h4>宮古牛焼肉 玉城 <span class="badge-wait">候補中・目前沒位</span></h4>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=宮古牛焼肉 玉城 宮古島" target="_blank" rel="noopener">地圖</a>
+          </div>
+          <div class="cand mini"><h4>木炭烤肉 琉宮園 <span class="badge-wait">候補中・目前沒位</span></h4>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=琉宮園 宮古島" target="_blank" rel="noopener">地圖</a>
+          </div>
+          <div class="cand">
+            <div class="cand-head"><h4>Today's… <span class="jp">Shima Bistro TAJIYA</span></h4><span class="stars">★★★★★</span></div>
+            <p class="cand-desc">南邊人氣輕食餐廳,波希米亞海洋風裝潢。推薦鮪魚 POKE BOWL、宮古牛燒肉 TJY Bowl、TJY Curry、Maqui Berry Bowl。11:00 開店前就常客滿,建議提早 30 分。</p>
+            <div class="cand-meta"><span>💰 早餐880–1880円・午餐980–1380円</span><span>⏰ 8–10 / 11–15(二四休)</span></div>
+            <div class="cand-addr">Sunagawa-1168-2, Gusukube · 店前僅約 3 車位,建議搭車前往</div>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=Shima Bistro TAJIYA 宮古島" target="_blank" rel="noopener">地圖</a>
+          </div>
+        </div>
+
+        <div class="cand-group">
+          <h3>冰品・果昔</h3>
+          <div class="cand">
+            <div class="cand-head"><h4>EIGHT smoothie's <span class="jp">エイトスムージー</span></h4><span class="stars">★★★★★</span></div>
+            <p class="cand-desc">全宮古島最好喝的新鮮水果冰沙,現點現做,açaí bowl 也推薦。白色貨櫃屋+粉紅裝潢很好拍。</p>
+            <div class="cand-meta"><span>💰 700–1500円</span><span>⏰ 11:00–17:00(週二休)</span></div>
+            <div class="cand-addr">Nishinakasone-460-5, Hirara · 店旁免費停車</div>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=エイトスムージー 宮古島" target="_blank" rel="noopener">地圖</a>
+          </div>
+          <div class="cand">
+            <div class="cand-head"><h4>Blue Seal <span class="jp">宮古島パイナガマ店</span></h4><span class="stars">★★★★☆</span></div>
+            <p class="cand-desc">沖繩最知名冰淇淋連鎖,推香檬雪酪、紅芋、琉球紅茶麻糬口味。冰淇淋主題裝潢很好拍。</p>
+            <div class="cand-meta"><span>💰 390–1000円</span><span>⏰ 10:00–20:00</span></div>
+            <div class="cand-addr">Kugai-654-23, Hirara · 店門口免費停車</div>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=ブルーシール 宮古島パイナガマ店" target="_blank" rel="noopener">地圖</a>
+          </div>
+          <div class="cand">
+            <div class="cand-head"><h4>RICCO gelato <span class="jp">リッコジェラート</span></h4><span class="stars">★★★☆☆</span></div>
+            <p class="cand-desc">當地食材義式 Gelato,雪鹽、芒果、草莓口味中規中矩,市區順路解暑用。</p>
+            <div class="cand-meta"><span>💰 600–960円</span><span>⏰ 週日一四五12–17:45,週六16–20:30(二三休)</span></div>
+            <div class="cand-addr">Shimozato-550, Hirara · 無專屬車位,附近投幣停車場步行1–3分</div>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=リッコジェラート 宮古島" target="_blank" rel="noopener">地圖</a>
+          </div>
+          <div class="cand">
+            <div class="cand-head"><h4>gelato Cafe Ninufa</h4><span class="stars">★★★★☆</span></div>
+            <p class="cand-desc">池間島隱藏景觀咖啡廳,旁邊就是可拍心形岩的 Ikizu Beach。百香果 gelato 清爽,窯烤披薩也好吃,店內沒冷氣。</p>
+            <div class="cand-meta"><span>💰 gelato 650–850円・披薩1600–2500円</span><span>⏰ 10:00–17:00(週三休)</span></div>
+            <div class="cand-addr">Maezato-976-1, Hirara · 店旁免費停車</div>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=gelato Cafe Ninufa 池間島" target="_blank" rel="noopener">地圖</a>
+          </div>
+        </div>
+
+        <div class="cand-group">
+          <h3>咖啡・烘焙</h3>
+          <div class="cand">
+            <div class="cand-head"><h4>Ningin Coffee <span class="jp">ニンギン珈琲</span></h4><span class="stars">★★★★☆</span></div>
+            <p class="cand-desc">在地咖啡職人推薦第一名,招牌熱黑糖拿鐵順口,巴斯克蛋糕也是人氣款,生意很好常常客滿。</p>
+            <div class="cand-meta"><span>💰 咖啡550–950円・蛋糕750円</span><span>⏰ 9:00–17:00</span></div>
+            <div class="cand-addr">Kugai-670-4 1F, Hirara · 門口約3個路邊車位</div>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=ニンギン珈琲 宮古島" target="_blank" rel="noopener">地圖</a>
+          </div>
+          <div class="cand">
+            <div class="cand-head"><h4>Moja's Bakery <span class="jp">モジャのパン屋</span></h4><span class="stars">★★★★☆</span></div>
+            <p class="cand-desc">市區人氣麵包店,近宮古神社,開店前就大排長龍,中午前常完售。建議 9:40 前到。巧克力、紅豆、黑糖包餡是人氣款,咖啡只能外帶。</p>
+            <div class="cand-meta"><span>💰 麵包250–380円(僅現金)</span><span>⏰ 二至五10–15,六10–12:30(日一休)</span></div>
+            <div class="cand-addr">Higashinakasone-20, Hirara · 專屬4車位(步行2分),或附近收費停車場</div>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=モジャのパン屋 宮古島" target="_blank" rel="noopener">地圖</a>
+          </div>
+          <div class="cand">
+            <div class="cand-head"><h4>cafeまほーてらす</h4><span class="stars">★★★★☆</span></div>
+            <p class="cand-desc">巷弄內隱藏咖啡廳,同時是間 Hostel(Mahho Terrace)。手工貝果保留麥香、口感彈牙,是招牌。</p>
+            <div class="cand-meta"><span>💰 貝果三明治900–1200円</span><span>⏰ 三至五8–15,六日8–13(二休)</span></div>
+            <div class="cand-addr">Nishizato-182-3, Hirara · 門口約3個車位</div>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=cafeまほーてらす 宮古島" target="_blank" rel="noopener">地圖</a>
+          </div>
+          <div class="cand">
+            <div class="cand-head"><h4>ensemble coffee miyakoisland</h4><span class="stars">★★★★☆</span></div>
+            <p class="cand-desc">少數現代風格咖啡廳,海洋元素裝潢好拍。手沖咖啡香氣足,巴西莓碗給料豐富。</p>
+            <div class="cand-meta"><span>💰 咖啡400–700円・莓果碗1400円</span><span>⏰ 10:00–18:00(二三休)</span></div>
+            <div class="cand-addr">Kugai-1068-9, Hirara · 路邊不便,旁邊永旺城購物中心可停車</div>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=ensemble coffee miyakoisland" target="_blank" rel="noopener">地圖</a>
+          </div>
+        </div>
+
+        <div class="cand-group">
+          <h3>甜點・伴手禮・在地小吃</h3>
+          <div class="cand">
+            <div class="cand-head"><h4>雪塩ミュージアム <span class="jp">雪鹽工廠</span></h4><span class="stars">★★★★★</span></div>
+            <p class="cand-desc">觀光客必訪,世界最細鹽做的冰淇淋,鹹香奶香很特別。可參觀製程、試吃各種調味料,伴手禮一次買齊。</p>
+            <div class="cand-meta"><span>💰 冰淇淋400–600円(冰淇淋機需現金)</span><span>⏰ 9:00–18:00</span></div>
+            <div class="cand-addr">Karimata-191, Hirara(北端) · 免費停車</div>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=雪塩ミュージアム 宮古島" target="_blank" rel="noopener">地圖</a>
+          </div>
+          <div class="cand">
+            <div class="cand-head"><h4>宮古きび茶屋 <span class="jp">さとうきび甘味処</span></h4><span class="stars">★★★★★</span></div>
+            <p class="cand-desc">可以自己選甘蔗現榨甘蔗汁,還有黑糖黃豆粉刨冰、白玉糰子。鐵皮屋藏在甘蔗田小路裡,生意很好。跟雪鹽工廠很近,可安排同一天。</p>
+            <div class="cand-meta"><span>💰 飲品500–1100円・甜品550–1000円</span><span>⏰ 10:00–15:45</span></div>
+            <div class="cand-addr">Karimata-129, Hirara · 免費停車</div>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=宮古きび茶屋 宮古島" target="_blank" rel="noopener">地圖</a>
+          </div>
+          <div class="cand">
+            <div class="cand-head"><h4>ぐるぐるめんや</h4><span class="stars">★★★★☆</span></div>
+            <p class="cand-desc">傳統日式刨冰(野葡萄、紅芋),份量大適合分享。店裡賣的「宮古うずまきそば」漩渦麵無添加、耐煮,很值得買回家。</p>
+            <div class="cand-meta"><span>💰 刨冰1300–1600円(僅現金)</span><span>⏰ 11:30–17:30(二三四休)</span></div>
+            <div class="cand-addr">Tomori-306-5, Gusukube · 免費停車</div>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=ぐるぐるめんや 宮古島" target="_blank" rel="noopener">地圖</a>
+          </div>
+          <div class="cand">
+            <div class="cand-head"><h4>Aragusuku Honeybee Garden <span class="jp">あらぐすくミツバチガーデン</span></h4><span class="stars">★★★★☆</span></div>
+            <p class="cand-desc">自家養蜂蜂蜜專門店,招牌蜂蜜堅果冰淇淋濃郁不膩。店內真的有蜜蜂在飛,小孩會覺得新奇。收得早,要抓緊時間去。</p>
+            <div class="cand-meta"><span>💰 冰淇淋700–850円</span><span>⏰ 11:30–15:00(一二休)</span></div>
+            <div class="cand-addr">Aragusuku-798-1, Gusukube · 門口免費停車</div>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=あらぐすくミツバチガーデン" target="_blank" rel="noopener">地圖</a>
+          </div>
+          <div class="cand">
+            <div class="cand-head"><h4>Nakayukui Shoten <span class="jp">なかゆくい商店</span></h4><span class="stars">★★★★★</span></div>
+            <p class="cand-desc">伊良部島排隊名店,炸紅芋球外酥內Q不甜膩,配冰淇淋剛好。常賣完就關店,建議早點或提早到下午開店前排隊。停車場在店後方,入口不對著店面,第一次去容易錯過。</p>
+            <div class="cand-meta"><span>💰 120円/顆,加冰淇淋450円(僅現金)</span><span>⏰ 9:30–12 / 13:30–14(一四休,賣完打烊)</span></div>
+            <div class="cand-addr">Kuninaka-57-3, Irabu</div>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=なかゆくい商店 伊良部島" target="_blank" rel="noopener">地圖</a>
+          </div>
+          <div class="cand">
+            <div class="cand-head"><h4>さとうきびの店ぶーずやー</h4><span class="stars">★★★★☆</span></div>
+            <p class="cand-desc">伊良部島隱藏黑糖專賣店,開在糖廠旁。招牌黑糖珍珠拿鐵無咖啡因,偏甜可請老闆少加糖。吸管都是甘蔗做的。</p>
+            <div class="cand-meta"><span>💰 飲品400–1000円(僅現金)</span><span>⏰ 12:00–18:00(一休)</span></div>
+            <div class="cand-addr">Irabu-1396 · 免費停車</div>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=さとうきびの店ぶーずやー" target="_blank" rel="noopener">地圖</a>
+          </div>
+          <div class="cand">
+            <div class="cand-head"><h4>Banana cake factory <span class="jp">モンテドール本店</span></h4><span class="stars">★★★★☆</span></div>
+            <p class="cand-desc">宮古島代表性伴手禮名店,近宮古神社。招牌生香蕉蛋糕香甜不膩,香蕉牛奶也濃郁,適合買禮盒送人。</p>
+            <div class="cand-meta"><span>💰 生香蕉蛋糕380円</span><span>⏰ 9:00–19:00</span></div>
+            <div class="cand-addr">Nishizato-7-2, Hirara · 店旁免費停車</div>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=バナナケーキのモンテドール本店" target="_blank" rel="noopener">地圖</a>
+          </div>
+        </div>
+
+        <div class="cand-group">
+          <h3>景點候選</h3>
+          <div class="cand mini"><h4>宮古神社 <span class="jp" style="font-size:11px">(日本最南端神社,近漲水御嶽,推測即筆記中的「宮谷神社」)</span></h4>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=宮古神社 宮古島" target="_blank" rel="noopener">地圖</a>
+          </div>
+          <div class="cand">
+            <div class="cand-head"><h4>纜車 <span class="jp">ザ シギラリフト オーシャンスカイ</span></h4></div>
+            <p class="cand-desc">南部シギラリゾート內的空中纜車,連接海岸與丘陵兩端,沖繩縣第一座、也是日本最西/最南端的索道。</p>
+            <div class="cand-meta"><span>💰 來回800円・單程500円</span><span>⏰ 10:00–17:00(每週一・三,每月一次四五公休)</span></div>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=ザ シギラリフト オーシャンスカイ" target="_blank" rel="noopener">地圖</a>
+          </div>
+        </div>
+
+        <div class="callout" style="margin-top:4px">
+          名單整理於 2026 年 7–9 月,實際營業時間、公休日、價格可能隨季節調整,尤其颱風前後,出發前建議再次確認。
+        </div>
+      </section>
+
+    </div></div>
+
+    <!-- ============ PAGE: 票券 ============ -->
+    <div class="page" data-page="tix"><div class="wrap">
+
+      <section>
+        <div class="section-head"><h2>票券</h2><span class="count">機票 / 住宿</span></div>
+
+        <div class="callout">
+          <b>注意</b> — 進出都走「みやこ下地島空港(SHI)」,在伊良部島上,跟「宮古空港(MMY)」是不同機場,兩地開車約 20–25 分鐘(經伊良部大橋)。租車導航跟還車地點都要認住 SHI。
+        </div>
+
+        <div class="flightcard">
+          <span class="tag">JX890 · 去程</span>
+          <div class="flightpath">
+            <div><div class="fp-code">TPE</div><div class="fp-sub">台北</div></div>
+            <div class="fp-line"><span class="fp-plane">✈</span></div>
+            <div style="text-align:right"><div class="fp-code">SHI</div><div class="fp-sub">下地島</div></div>
+          </div>
+          <div class="flightmeta"><span>09/20 (日) 13:00 抵達</span></div>
+        </div>
+
+        <div class="flightcard">
+          <span class="tag">JX891 · 回程</span>
+          <div class="flightpath">
+            <div><div class="fp-code">SHI</div><div class="fp-sub">下地島</div></div>
+            <div class="fp-line"><span class="fp-plane">✈</span></div>
+            <div style="text-align:right"><div class="fp-code">TPE</div><div class="fp-sub">台北</div></div>
+          </div>
+          <div class="flightmeta"><span>09/23 (三) 14:00 起飛</span></div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-head"><h2>住宿</h2><span class="count">2 間</span></div>
+
+        <div class="ticket">
+          <div class="ticket-top">
+            <span class="tag">Night 1–2</span>
+            <h3>宮古島 11 號公寓飯店</h3>
+            <div class="addr">Apartment Hotel 11 Miyakojima · 沖縄県宮古島市平良松原558-3</div>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=宮古島市平良松原558-3" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11a7 7 0 1 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+              在 Google 地圖開啟
+            </a>
+          </div>
+          <div class="stub">
+            <div><div class="lbl">Check-in</div><div class="val">09/20 16:00</div></div>
+            <div><div class="lbl">Check-out</div><div class="val">09/22 10:00</div></div>
+          </div>
+        </div>
+
+        <div class="ticket">
+          <div class="ticket-top">
+            <span class="tag">Night 3</span>
+            <h3>Canopy by Hilton Okinawa Miyako Island Resort</h3>
+            <div class="addr">沖縄県宮古島市平良久貝550-7 · Turibaa 度假區,近伊良部大橋 / パイナガマビーチ</div>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=宮古島市平良久貝550-7 Canopy by Hilton" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11a7 7 0 1 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+              在 Google 地圖開啟
+            </a>
+          </div>
+          <div class="stub">
+            <div><div class="lbl">Check-in</div><div class="val">09/22 15:00</div></div>
+            <div><div class="lbl">Check-out</div><div class="val">09/23 11:00</div></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-head"><h2>其他票券</h2></div>
+        <div class="placeholder">
+          <div class="icon">🎫</div>
+          之後會補上機票 e-ticket、租車確認信、潛水預約等 QR code 截圖,傳給我之後會加進這裡。
+        </div>
+      </section>
+
+    </div></div>
+
+    <!-- ============ PAGE: 清單 ============ -->
+    <div class="page" data-page="pack"><div class="wrap">
+
+      <section>
+        <div class="section-head"><h2>行前清單</h2></div>
+        <div class="pack-grid" id="packGrid">
+          <label class="pack-item"><input type="checkbox" data-key="license"> 台灣駕照日文譯本(非國際駕照!)</label>
+          <label class="pack-item"><input type="checkbox" data-key="swim"> 泳衣 ×2(輪流曬乾)</label>
+          <label class="pack-item"><input type="checkbox" data-key="reef"> 珊瑚礁友善防曬乳</label>
+          <label class="pack-item"><input type="checkbox" data-key="shoes"> 水陸兩用鞋(礁石多)</label>
+          <label class="pack-item"><input type="checkbox" data-key="towel"> 快乾毛巾</label>
+          <label class="pack-item"><input type="checkbox" data-key="phonebag"> 防水手機袋</label>
+          <label class="pack-item"><input type="checkbox" data-key="hat"> 遮陽帽 / 墨鏡</label>
+          <label class="pack-item"><input type="checkbox" data-key="rain"> 薄雨衣(9 月午後雷陣雨)</label>
+          <label class="pack-item"><input type="checkbox" data-key="powerbank"> 行動電源</label>
+          <label class="pack-item"><input type="checkbox" data-key="meds"> 個人常備藥</label>
+          <div class="pack-note">駕照譯本可在台灣監理站或線上申請,建議出發前至少 2 週辦好。</div>
+        </div>
+      </section>
+
+    </div></div>
+
+  </div>
+</div>
+
+<footer>宮古島 2026.09.20 – 09.23 · 自駕行程</footer>
 
 <script>
+(function(){
+  var tabs = ['itin','cand','tix','pack'];
+  var step = 100 / tabs.length;
+  var viewport = document.querySelector('.pages-viewport');
+  var track = document.getElementById('pagesTrack');
+  var buttons = Array.prototype.slice.call(document.querySelectorAll('.tab-btn'));
+  var KEY = 'miyako-tab-2026';
+  var current = 0;
+
+  try {
+    var saved = localStorage.getItem(KEY);
+    var idx = tabs.indexOf(saved);
+    if (idx > -1) current = idx;
+  } catch(e) {}
+
+  function apply(animate){
+    if (!animate) track.classList.add('dragging');
+    track.style.transform = 'translateX(-' + (current * step) + '%)';
+    if (!animate) {
+      requestAnimationFrame(function(){
+        requestAnimationFrame(function(){ track.classList.remove('dragging'); });
+      });
+    }
+    buttons.forEach(function(b, i){ b.classList.toggle('active', i === current); });
+    try { localStorage.setItem(KEY, tabs[current]); } catch(e) {}
+  }
+
+  buttons.forEach(function(btn, i){
+    btn.addEventListener('click', function(){
+      current = i;
+      apply(true);
+    });
+  });
+
+  apply(false);
+
+  var startX = 0, startY = 0, dx = 0, dy = 0, touching = false;
+  track.addEventListener('touchstart', function(e){
+    touching = true;
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+    dx = 0; dy = 0;
+    track.classList.add('dragging');
+  }, {passive:true});
+
+  track.addEventListener('touchmove', function(e){
+    if (!touching) return;
+    dx = e.touches[0].clientX - startX;
+    dy = e.touches[0].clientY - startY;
+    if (Math.abs(dx) > Math.abs(dy)) {
+      var base = -current * step;
+      var pct = base + (dx / viewport.clientWidth * step);
+      track.style.transform = 'translateX(' + pct + '%)';
+    }
+  }, {passive:true});
+
+  track.addEventListener('touchend', function(){
+    if (!touching) return;
+    touching = false;
+    track.classList.remove('dragging');
+    if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy)) {
+      if (dx < 0 && current < tabs.length - 1) current++;
+      else if (dx > 0 && current > 0) current--;
+    }
+    apply(true);
+  });
+})();
+
 (function(){
   var KEY = 'miyako-packing-2026';
   var state = {};
