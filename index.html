@@ -231,6 +231,17 @@
 
   /* ---------- Candidate list (未定案候選) ---------- */
   .cand-intro{ font-size:13px; color:var(--ink-dim); margin-bottom:16px; }
+  .filter-bar{
+    display:flex; gap:8px; overflow-x:auto; padding-bottom:6px; margin-bottom:20px;
+    -webkit-overflow-scrolling:touch; scrollbar-width:none;
+  }
+  .filter-bar::-webkit-scrollbar{ display:none; }
+  .chip{
+    flex:none; padding:7px 13px; border-radius:20px; border:1px solid var(--line);
+    background:var(--surface); font-family:inherit; font-size:12.5px; font-weight:700;
+    color:var(--ink-dim); cursor:pointer; white-space:nowrap; -webkit-tap-highlight-color:transparent;
+  }
+  .chip.active{ background:var(--ocean); border-color:var(--ocean); color:#fff; }
   .cand-group{ margin-bottom:24px; }
   .cand-group h3{
     font-size:12.5px; font-weight:700; color:var(--ocean); text-transform:uppercase;
@@ -474,39 +485,49 @@
     <div class="page" data-page="cand"><div class="wrap">
 
       <section>
-        <div class="section-head"><h2>潛水店家</h2><span class="count">自行預約</span></div>
-        <div class="grid2">
-          <div class="pick">
-            <h4>EARTH-LENS</h4>
-            <p>1–4 人小團,新手友善,教練帶得細。</p>
-            <span class="badge">少人數</span>
-          </div>
-          <div class="pick">
-            <h4>サンアイランド宮古島</h4>
-            <p>2002 年開業,家族經營,老牌穩定。</p>
-            <span class="badge">老牌</span>
-          </div>
-          <div class="pick">
-            <h4>Step 海 Divers School</h4>
-            <p>1 人也能報名,包場式體驗潛水。</p>
-            <span class="badge">彈性</span>
-          </div>
-          <div class="pick">
-            <h4>アクアティックアドベンチャー</h4>
-            <p>天天出船,新手到老手都收。</p>
-            <span class="badge">天天出船</span>
-          </div>
-        </div>
-        <div class="callout" style="margin-top:12px">
-          9 月仍是颱風尾,建議選<b>可免費改期</b>的方案,出發前一週再密切關注海況。
-        </div>
-      </section>
-
-      <section>
         <div class="section-head"><h2>候選清單</h2><span class="count">未定案</span></div>
-        <div class="cand-intro">行程還沒定,先把找到的口袋名單整理起來,到時候看天氣、心情、有沒有位子再彈性挑。</div>
+        <div class="cand-intro">行程還沒定,先把找到的口袋名單整理起來,到時候看天氣、心情、有沒有位子再彈性挑。點下面分類可以快速篩選。</div>
 
-        <div class="cand-group">
+        <div class="filter-bar" id="filterBar">
+          <button class="chip active" data-filter="all">全部</button>
+          <button class="chip" data-filter="dive">🤿 潛水</button>
+          <button class="chip" data-filter="meal">🍽 正餐</button>
+          <button class="chip" data-filter="cafe">☕ 咖啡</button>
+          <button class="chip" data-filter="sweet">🍧 冰品</button>
+          <button class="chip" data-filter="snack">🎁 伴手禮</button>
+          <button class="chip" data-filter="scenery">📷 景點</button>
+        </div>
+
+        <div class="cand-group" data-catgroup="dive">
+          <h3>潛水店家</h3>
+          <div class="grid2">
+            <div class="pick">
+              <h4>EARTH-LENS</h4>
+              <p>1–4 人小團,新手友善,教練帶得細。</p>
+              <span class="badge">少人數</span>
+            </div>
+            <div class="pick">
+              <h4>サンアイランド宮古島</h4>
+              <p>2002 年開業,家族經營,老牌穩定。</p>
+              <span class="badge">老牌</span>
+            </div>
+            <div class="pick">
+              <h4>Step 海 Divers School</h4>
+              <p>1 人也能報名,包場式體驗潛水。</p>
+              <span class="badge">彈性</span>
+            </div>
+            <div class="pick">
+              <h4>アクアティックアドベンチャー</h4>
+              <p>天天出船,新手到老手都收。</p>
+              <span class="badge">天天出船</span>
+            </div>
+          </div>
+          <div class="callout" style="margin-top:12px">
+            9 月仍是颱風尾,建議選<b>可免費改期</b>的方案,出發前一週再密切關注海況。
+          </div>
+        </div>
+
+        <div class="cand-group" data-catgroup="meal">
           <h3>正餐</h3>
           <div class="cand mini"><h4>Blue Turtle 宮古島</h4>
             <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=Blue Turtle 宮古島" target="_blank" rel="noopener">地圖</a>
@@ -517,8 +538,12 @@
           <div class="cand mini"><h4>宮古牛焼肉 玉城 <span class="badge-wait">候補中・目前沒位</span></h4>
             <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=宮古牛焼肉 玉城 宮古島" target="_blank" rel="noopener">地圖</a>
           </div>
-          <div class="cand mini"><h4>木炭烤肉 琉宮園 <span class="badge-wait">候補中・目前沒位</span></h4>
-            <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=琉宮園 宮古島" target="_blank" rel="noopener">地圖</a>
+          <div class="cand">
+            <div class="cand-head"><h4>炭火焼肉 琉宮苑 <span class="jp">RYUGUEN</span></h4><span class="badge-wait">候補中・目前沒位</span></div>
+            <p class="cand-desc">シギラセブンマイルズリゾート內的碳火燒肉專門店,主打限量宮古牛跟近海海鮮,食べログ 3.46。</p>
+            <div class="cand-meta"><span>💰 預算6000–7999円</span><span>⏰ 17:00–22:00,LO21:30(週一休)</span></div>
+            <div class="cand-addr">上野宮国974-7(Shigira Resort 內)</div>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=炭火焼肉 琉宮苑 宮古島" target="_blank" rel="noopener">地圖</a>
           </div>
           <div class="cand">
             <div class="cand-head"><h4>Today's… <span class="jp">Shima Bistro TAJIYA</span></h4><span class="stars">★★★★★</span></div>
@@ -527,9 +552,59 @@
             <div class="cand-addr">Sunagawa-1168-2, Gusukube · 店前僅約 3 車位,建議搭車前往</div>
             <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=Shima Bistro TAJIYA 宮古島" target="_blank" rel="noopener">地圖</a>
           </div>
+          <div class="cand">
+            <div class="cand-head"><h4>にいまそば <span class="jp">宮古蕎麥麵</span></h4></div>
+            <p class="cand-desc">狩俣地區的宮古そば専門店,離雪鹽工廠、HARRY'S Shrimp Truck 都不遠,可安排同一天北線順路吃。</p>
+            <div class="cand-addr">平良狩俣3 · 細節未查證,建議去程前再確認營業時間</div>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=にいまそば 宮古島" target="_blank" rel="noopener">地圖</a>
+          </div>
+          <div class="cand">
+            <div class="cand-head"><h4>んつばた <span class="jp">水雲(もずく)麵専門店</span></h4></div>
+            <p class="cand-desc">西里通り一帶,主打沖繩水雲(海藻)拌麵的専門店。</p>
+            <div class="cand-addr">平良西里381 · 細節未查證,建議去程前再確認營業時間</div>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=んつばた 宮古島" target="_blank" rel="noopener">地圖</a>
+          </div>
+          <div class="cand">
+            <div class="cand-head"><h4>みやこパーラー ハイサイ <span class="jp">島食材居酒屋</span></h4></div>
+            <p class="cand-desc">「ツマンデ呑める」為概念的居酒屋,主打伊良部島現撈鮪魚、鰹魚跟島野菜下酒菜,土鍋ジューシー(什錦飯)是招牌。</p>
+            <div class="cand-meta"><span>⏰ 17:00–24:00,食物LO23:00(週一休)</span></div>
+            <div class="cand-addr">平良下里601 ちゅらハウス1F</div>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=みやこパーラー ハイサイ 宮古島" target="_blank" rel="noopener">地圖</a>
+          </div>
+          <div class="cand">
+            <div class="cand-head"><h4>HARRY'S Shrimp Truck <span class="jp">夏威夷蒜蝦餐車</span></h4><span class="stars">★★★★☆</span></div>
+            <p class="cand-desc">西平安名崎展望台旁,黃色校車造型,蝦子先炸過再拌醬,殼吃起來也酥脆。開車兜風途中順路吃很適合。食べログ 3.66。</p>
+            <div class="cand-meta"><span>⏰ 11:00–18:00(週二休)</span></div>
+            <div class="cand-addr">平良狩俣358-1(西平安名崎旁)</div>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=HARRY'S Shrimp Truck 宮古島" target="_blank" rel="noopener">地圖</a>
+          </div>
+          <div class="cand">
+            <div class="cand-head"><h4>いりくんやぁ <span class="jp">古民家ソーキ定食</span></h4></div>
+            <p class="cand-desc">伊良部長浜的古民家改裝定食店,菜單只有一種——ソーキ定食(滷豬軟骨定食),燉到骨肉分離,曾上過電視節目介紹。</p>
+            <div class="cand-addr">伊良部長浜一番地 · 細節未查證,建議去程前再確認營業時間</div>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=いりくんやぁ 伊良部島" target="_blank" rel="noopener">地圖</a>
+          </div>
+          <div class="cand">
+            <div class="cand-head"><h4>Tawan <span class="jp">泰式料理</span></h4></div>
+            <p class="cand-desc">跟「ぐるぐるめんや」同一個地址(新城友利306-5),想換口味吃泰式的話可以順路排進去。</p>
+            <div class="cand-addr">新城友利306-5 · 細節未查證,建議去程前再確認營業時間</div>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=Tawan 宮古島 タイ料理" target="_blank" rel="noopener">地圖</a>
+          </div>
+          <div class="cand">
+            <div class="cand-head"><h4>燦 伊良部島店 <span class="jp">和牛涮涮鍋/壽喜燒</span></h4></div>
+            <p class="cand-desc">那霸人氣涮涮鍋名店的伊良部島分店,開在フェリスヴィラスイート伊良部島度假村內。中午賣沖繩そば,晚上是 A4 和牛涮涮鍋/壽喜燒跟島豬・阿古豬,下地島空港車程約 5 分鐘,適合最後一天前吃頓好的。</p>
+            <div class="cand-addr">伊良部長浜1643-1(フェリスヴィラスイート内)</div>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=燦 伊良部島店" target="_blank" rel="noopener">地圖</a>
+          </div>
+          <div class="cand">
+            <div class="cand-head"><h4>酒場テノワヤ <span class="jp">居酒屋</span></h4></div>
+            <p class="cand-desc">市區西里通り一帶的居酒屋。</p>
+            <div class="cand-addr">平良西里263-2 · 細節未查證,建議去程前再確認營業時間</div>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=酒場テノワヤ 宮古島" target="_blank" rel="noopener">地圖</a>
+          </div>
         </div>
 
-        <div class="cand-group">
+        <div class="cand-group" data-catgroup="sweet">
           <h3>冰品・果昔</h3>
           <div class="cand">
             <div class="cand-head"><h4>EIGHT smoothie's <span class="jp">エイトスムージー</span></h4><span class="stars">★★★★★</span></div>
@@ -559,9 +634,16 @@
             <div class="cand-addr">Maezato-976-1, Hirara · 店旁免費停車</div>
             <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=gelato Cafe Ninufa 池間島" target="_blank" rel="noopener">地圖</a>
           </div>
+          <div class="cand">
+            <div class="cand-head"><h4>Su She Maro <span class="jp">スシマロ・馬拉薩多甜甜圈</span></h4></div>
+            <p class="cand-desc">外帶專門的馬拉薩多甜甜圈店,只在週六日一營業,賣完就收。店名來自老闆養的三隻玩具貴賓犬。</p>
+            <div class="cand-meta"><span>💰 280–300円/顆(僅現金)</span><span>⏰ 僅六日一 10:00–賣完為止</span></div>
+            <div class="cand-addr">平良下里510-6</div>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=Su She Maro 宮古島" target="_blank" rel="noopener">地圖</a>
+          </div>
         </div>
 
-        <div class="cand-group">
+        <div class="cand-group" data-catgroup="cafe">
           <h3>咖啡・烘焙</h3>
           <div class="cand">
             <div class="cand-head"><h4>Ningin Coffee <span class="jp">ニンギン珈琲</span></h4><span class="stars">★★★★☆</span></div>
@@ -591,9 +673,16 @@
             <div class="cand-addr">Kugai-1068-9, Hirara · 路邊不便,旁邊永旺城購物中心可停車</div>
             <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=ensemble coffee miyakoisland" target="_blank" rel="noopener">地圖</a>
           </div>
+          <div class="cand">
+            <div class="cand-head"><h4>1 LAB Hello, VACAY! <span class="jp">網美咖啡飲品站</span></h4></div>
+            <p class="cand-desc">通稱「ハロバケ」,伊良部島最上鏡的白色貨櫃咖啡站,離 17END 車程約 10 分。用澳洲得獎有機咖啡豆,燕麥奶拿鐵也推。還有吊床帳篷座位跟屋頂露台,順帶賣泳裝小物。</p>
+            <div class="cand-meta"><span>⏰ 11:00–17:00,LO16:30</span></div>
+            <div class="cand-addr">伊良部仲地96-2</div>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=1 LAB Hello VACAY 伊良部島" target="_blank" rel="noopener">地圖</a>
+          </div>
         </div>
 
-        <div class="cand-group">
+        <div class="cand-group" data-catgroup="snack">
           <h3>甜點・伴手禮・在地小吃</h3>
           <div class="cand">
             <div class="cand-head"><h4>雪塩ミュージアム <span class="jp">雪鹽工廠</span></h4><span class="stars">★★★★★</span></div>
@@ -644,9 +733,16 @@
             <div class="cand-addr">Nishizato-7-2, Hirara · 店旁免費停車</div>
             <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=バナナケーキのモンテドール本店" target="_blank" rel="noopener">地圖</a>
           </div>
+          <div class="cand">
+            <div class="cand-head"><h4>海美来 <span class="jp">かいみーる・池間島土產食堂</span></h4></div>
+            <p class="cand-desc">池間大橋另一端、池間島入口的粉紅色 drive-in,3 樓展望台可以看池間藍海景、池間大橋跟大神島。招牌是螺肉そば、螺肉壺焼、紅芋もち。</p>
+            <div class="cand-meta"><span>💰 螺肉そば1000円・紅芋もち200円</span></div>
+            <div class="cand-addr">平良字池間1173-7</div>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=海美来 池間島" target="_blank" rel="noopener">地圖</a>
+          </div>
         </div>
 
-        <div class="cand-group">
+        <div class="cand-group" data-catgroup="scenery">
           <h3>景點候選</h3>
           <div class="cand mini"><h4>宮古神社 <span class="jp" style="font-size:11px">(日本最南端神社,近漲水御嶽,推測即筆記中的「宮谷神社」)</span></h4>
             <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=宮古神社 宮古島" target="_blank" rel="noopener">地圖</a>
@@ -836,6 +932,23 @@
       else if (dx > 0 && current > 0) current--;
     }
     apply(true);
+  });
+})();
+
+(function(){
+  var chips = Array.prototype.slice.call(document.querySelectorAll('#filterBar .chip'));
+  var groups = Array.prototype.slice.call(document.querySelectorAll('[data-catgroup]'));
+  if (!chips.length) return;
+
+  chips.forEach(function(chip){
+    chip.addEventListener('click', function(){
+      chips.forEach(function(c){ c.classList.remove('active'); });
+      chip.classList.add('active');
+      var f = chip.getAttribute('data-filter');
+      groups.forEach(function(g){
+        g.style.display = (f === 'all' || g.getAttribute('data-catgroup') === f) ? '' : 'none';
+      });
+    });
   });
 })();
 
