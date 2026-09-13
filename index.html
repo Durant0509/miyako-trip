@@ -266,6 +266,17 @@
     background:color-mix(in srgb, var(--sunset) 14%, transparent); padding:2px 8px; border-radius:20px;
     white-space:nowrap;
   }
+  .rank{
+    display:inline-flex; align-items:center; justify-content:center; min-width:22px; height:22px;
+    border-radius:50%; background:var(--ocean); color:#fff; font-size:11.5px; font-weight:800;
+    flex:none; margin-right:8px;
+  }
+  .cand-verdict{
+    display:inline-block; font-size:11px; font-weight:700; color:var(--ocean);
+    background:color-mix(in srgb, var(--ocean) 10%, transparent); padding:3px 9px; border-radius:20px;
+    margin-top:8px;
+  }
+  .rating-row{ display:flex; gap:12px; font-size:11px; color:var(--ink-dim); margin-top:6px; flex-wrap:wrap; }
 
   /* ---------- Callout ---------- */
   .callout{
@@ -491,6 +502,8 @@
         <div class="filter-bar" id="filterBar">
           <button class="chip active" data-filter="all">全部</button>
           <button class="chip" data-filter="dive">🤿 潛水</button>
+          <button class="chip" data-filter="night">🌙 夜景</button>
+          <button class="chip" data-filter="beach">🏖 海邊</button>
           <button class="chip" data-filter="meal">🍽 正餐</button>
           <button class="chip" data-filter="cafe">☕ 咖啡</button>
           <button class="chip" data-filter="sweet">🍧 冰品</button>
@@ -524,6 +537,83 @@
           </div>
           <div class="callout" style="margin-top:12px">
             9 月仍是颱風尾,建議選<b>可免費改期</b>的方案,出發前一週再密切關注海況。
+          </div>
+        </div>
+
+        <div class="cand-group" data-catgroup="night">
+          <h3>夜景・星空</h3>
+          <div class="cand-intro" style="margin-top:-4px">依「這趟行程」的順路程度排序,不是單純景點排名 —— Day3 晚上進 Canopy Hilton 後確定不外出,所以星空只排得進 Day1 / Day2 晚上。</div>
+
+          <div class="cand">
+            <div class="cand-head"><span class="rank">1</span><h4>砂山ビーチ</h4></div>
+            <p class="cand-desc">Day1 傍晚本來就會去看日落,建議日落後別急著走,原地等天黑留下來看星星就好,零額外車程。天然岩石拱門配銀河是招牌畫面。</p>
+            <div class="rating-row"><span>🌑暗度 4/5</span><span>🚗好抵達(徒歩5分) 3/5</span><span>👍推薦 4/5</span></div>
+            <span class="cand-verdict">✅ 最順路,直接留下來就好</span>
+          </div>
+
+          <div class="cand">
+            <div class="cand-head"><span class="rank">2</span><h4>西平安名崎 <span class="jp">Nishi-Hennazaki</span></h4></div>
+            <p class="cand-desc">跟 HARRY'S Shrimp Truck、雪塩ミュージアム、にいまそば 是同一條北邊路線,静かな岬で海と星空のパノラマ,停車場下車就到,是 6 個點裡最好抵達的。</p>
+            <div class="rating-row"><span>🌑暗度 4/5</span><span>🚗好抵達 5/5</span><span>👍推薦 4/5</span></div>
+            <span class="cand-verdict">🧭 若排進北線這站最順</span>
+            <div style="margin-top:8px"><a class="maplink" href="https://www.google.com/maps/search/?api=1&query=西平安名崎 宮古島" target="_blank" rel="noopener">地圖</a></div>
+          </div>
+
+          <div class="cand">
+            <div class="cand-head"><span class="rank">3</span><h4>新城海岸 <span class="jp">Arasu Coast</span></h4></div>
+            <p class="cand-desc">白天浮潛、晚上看星星都推薦的雙棲點,詳見下方「海邊」分類。天の川(銀河)清晰度高。</p>
+            <div class="rating-row"><span>🌑暗度 4/5</span><span>🚗好抵達 3/5</span><span>👍推薦 4/5</span></div>
+            <span class="cand-verdict">🌊 白天晚上都能去,見海邊分類</span>
+          </div>
+
+          <div class="cand">
+            <div class="cand-head"><span class="rank">4</span><h4>東平安名崎</h4></div>
+            <p class="cand-desc">星空地圖上評分最高的點,但 Day3 是白天順路去(見「行程」分頁),晚上要專程再跑一趟約 40 分鐘車程,體力許可、天氣夠好的話很值得。</p>
+            <div class="rating-row"><span>🌑暗度 5/5</span><span>🚗好抵達(徒歩10分) 3/5</span><span>👍推薦 5/5</span></div>
+            <span class="cand-verdict">⭐ 評分最高,但要專程晚上跑一趟</span>
+          </div>
+
+          <div class="cand">
+            <div class="cand-head"><span class="rank">5</span><h4>池間島 <span class="jp">池間大橋周辺</span></h4></div>
+            <p class="cand-desc">渡池間大橋就到,同樣是北線的點,可以跟西平安名崎排在一起。</p>
+            <div class="rating-row"><span>🌑暗度 3/5</span><span>🚗好抵達 4/5</span><span>👍推薦 4/5</span></div>
+            <span class="cand-verdict">🧭 可跟西平安名崎併成北線一趟</span>
+          </div>
+
+          <div class="cand">
+            <div class="cand-head"><span class="rank">6</span><h4>來間島 <span class="jp">来間大橋周辺</span></h4></div>
+            <p class="cand-desc">Day2 白天已經會經過來間大橋,晚上光害比較多,6 個點裡評分最低,只是剛好在附近的話可以順便留一下,不必特地跑。</p>
+            <div class="rating-row"><span>🌑暗度 3/5</span><span>🚗好抵達 5/5</span><span>👍推薦 3/5</span></div>
+            <span class="cand-verdict">😐 白天已經去過,晚上非必要</span>
+          </div>
+        </div>
+
+        <div class="cand-group" data-catgroup="beach">
+          <h3>海邊・浮潛</h3>
+          <div class="cand-intro" style="margin-top:-4px">17END、砂山ビーチ、與那覇前浜、伊良部大橋、來間大橋已經在行程裡,這裡是還沒排進去的新選項。</div>
+
+          <div class="cand">
+            <div class="cand-head"><span class="rank">1</span><h4>吉野海岸 <span class="jp">Yoshino Coast</span></h4></div>
+            <p class="cand-desc">宮古島數一數二的浮潛首選,水色透明度高,現場多半有浮具租借。市街地開車約 25 分。</p>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=吉野海岸 宮古島" target="_blank" rel="noopener">地圖</a>
+          </div>
+
+          <div class="cand">
+            <div class="cand-head"><span class="rank">2</span><h4>インギャーマリンガーデン <span class="jp">Ingya Marine Garden</span></h4></div>
+            <p class="cand-desc">天然入江,水域平穩、エメラルドグリーン的海色,適合浮潛,離東平安名崎不遠。市街地開車約 25 分。</p>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=インギャーマリンガーデン 宮古島" target="_blank" rel="noopener">地圖</a>
+          </div>
+
+          <div class="cand">
+            <div class="cand-head"><span class="rank">3</span><h4>新城海岸 <span class="jp">Arasu Coast</span></h4></div>
+            <p class="cand-desc">透明度很高的海跟岩場對比景色很美,也是夜景推薦點(見上方「夜景」分類)。市街地開車約 20 分。</p>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=新城海岸 宮古島" target="_blank" rel="noopener">地圖</a>
+          </div>
+
+          <div class="cand">
+            <div class="cand-head"><h4>池間大橋 <span class="jp">Ikema Ohashi</span></h4></div>
+            <p class="cand-desc">宮古藍海面上一路直直延伸的跨海大橋,市街地開車約 30 分,可以跟池間島夜景排同一趟。</p>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=池間大橋" target="_blank" rel="noopener">地圖</a>
           </div>
         </div>
 
