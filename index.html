@@ -1161,6 +1161,7 @@
 
   var startX = 0, startY = 0, dx = 0, dy = 0, touching = false;
   track.addEventListener('touchstart', function(e){
+    if (e.target.closest('.filter-bar')) { touching = false; return; }
     touching = true;
     startX = e.touches[0].clientX;
     startY = e.touches[0].clientY;
