@@ -177,6 +177,16 @@
   .fp-plane{ position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:13px; }
   .flightmeta{ display:flex; justify-content:space-between; margin-top:10px; font-size:11.5px; color:#bfe8ef; }
 
+  /* ---------- QR codes (always on white so they stay scannable) ---------- */
+  .qrbox{
+    background:#fff; border:1px solid rgba(0,0,0,.08); border-radius:12px;
+    padding:12px 12px 10px; margin-top:10px;
+  }
+  .qrbox img{ display:block; width:100%; max-width:300px; margin:0 auto; }
+  .qr-cap{ text-align:center; font-size:11.5px; color:#444; margin-top:8px; font-weight:700; }
+  .qr-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  @media (max-width:520px){ .qr-grid{ grid-template-columns:1fr; } }
+
   .placeholder{
     border:1.5px dashed var(--line); border-radius:16px; padding:22px 18px; text-align:center;
     color:var(--ink-dim); font-size:13px;
@@ -1097,19 +1107,21 @@
       <section>
         <div class="section-head"><h2>登機・入境・eSIM</h2><span class="count">QR 在手機裡</span></div>
 
-        <div class="callout">
-          <b>QR code 沒有放在這個頁面上</b> — 這個 repo 是公開的,登機證 QR(含訂位代號)、入境審查 QR(個資)、eSIM 啟用碼(被搶掃就失效)放上來風險太高。實際要掃的 QR 請用手機原本的來源:航空公司 App、Visit Japan Web、eSIM 安裝畫面。這裡只留辨識用的重點資訊。
-        </div>
-
         <div class="ticket">
           <div class="ticket-top">
             <span class="tag">登機證</span>
             <h3>JX890 · 09/20 台北 → 下地島</h3>
             <div class="addr">登機區域 Zone 4</div>
-          </div>
-          <div class="stub">
-            <div><div class="lbl">你</div><div class="val">17J</div></div>
-            <div><div class="lbl">老婆</div><div class="val">17K</div></div>
+            <div class="qr-grid">
+              <div class="qrbox">
+                <img src="tickets/boarding-17j.png" alt="登機證 17J">
+                <div class="qr-cap">你 · 座位 17J</div>
+              </div>
+              <div class="qrbox">
+                <img src="tickets/boarding-17k.png" alt="登機證 17K">
+                <div class="qr-cap">女友 · 座位 17K</div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -1117,7 +1129,17 @@
           <div class="ticket-top">
             <span class="tag">入境審查・海關申報</span>
             <h3>Visit Japan Web QR</h3>
-            <div class="addr">兩人份都已產生,落地前在 Visit Japan Web App 開啟出示即可</div>
+            <div class="addr">落地後入境審查跟海關申報都要出示</div>
+            <div class="qr-grid">
+              <div class="qrbox">
+                <img src="tickets/entry-qr.png" alt="入境 QR 1">
+                <div class="qr-cap">你</div>
+              </div>
+              <div class="qrbox">
+                <img src="tickets/entry-qr-2.png" alt="入境 QR 2">
+                <div class="qr-cap">女友</div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -1125,8 +1147,22 @@
           <div class="ticket-top">
             <span class="tag">eSIM ×2</span>
             <h3>兩張都已就緒</h3>
-            <div class="addr">ICCID 尾號 <b>…5931</b> 與 <b>…9320</b>,出發前先確認手機裡兩張都已安裝完成,落地再開啟數據漫遊即可。</div>
+            <div class="addr">如果已經裝進手機就不用再掃,落地開啟數據漫遊即可</div>
+            <div class="qr-grid">
+              <div class="qrbox">
+                <img src="tickets/esim-1.png" alt="eSIM 1">
+                <div class="qr-cap">ICCID …5931</div>
+              </div>
+              <div class="qrbox">
+                <img src="tickets/esim-2.png" alt="eSIM 2">
+                <div class="qr-cap">ICCID …9320</div>
+              </div>
+            </div>
           </div>
+        </div>
+
+        <div class="callout" style="margin-top:4px">
+          <b>回國後記得處理</b> — 這個 repo 是公開的,這些 QR 含訂位代號跟個資。玩完回來建議把 repo 刪掉或轉私密,順便把那組 GitHub token 也撤銷。
         </div>
       </section>
 
